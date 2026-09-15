@@ -1,0 +1,1534 @@
+
+/* =========================================================
+   DIGITAL VAULT — FINAL RESPONSIVE HARDENING
+   v1.0.50
+   Cross-device layout safety for phones, tablets, desktop,
+   touch interaction, long content and fixed app chrome.
+========================================================= */
+
+/* ---------- Global sizing / overflow contract ---------- */
+html,
+body,
+#root {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+body {
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+
+img,
+svg,
+video,
+canvas,
+iframe {
+  max-width: 100%;
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  box-sizing: border-box;
+}
+
+input,
+textarea,
+select {
+  min-width: 0;
+}
+
+button,
+a {
+  touch-action: manipulation;
+}
+
+* {
+  min-width: 0;
+}
+
+/* ---------- Authenticated shell ---------- */
+.app-page-shell,
+.app-page-main,
+.app-page-content {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.app-page-main {
+  overflow: visible;
+}
+
+.app-page-content {
+  overflow: visible;
+}
+
+/* ---------- Dashboard shell ---------- */
+.dashboard,
+.dashboard-content {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.dashboard {
+  overflow: visible;
+}
+
+.dashboard-content {
+  overflow: visible;
+}
+
+.dashboard-section,
+.section-title,
+.cards-grid,
+.chart-grid,
+.dashboard-footer {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.section-title > div,
+.dashboard-footer > div {
+  min-width: 0;
+}
+
+.section-title h2,
+.section-title p,
+.dashboard-footer p,
+.dashboard-footer span {
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Fixed app topbar ---------- */
+.topbar {
+  box-sizing: border-box;
+  min-width: 0 !important;
+  max-width: none !important;
+}
+
+.topbar > .search-box {
+  min-width: 0 !important;
+  max-width: 100%;
+}
+
+.topbar-right {
+  min-width: 0 !important;
+}
+
+.notification-dropdown,
+.profile-dropdown {
+  max-width: calc(100vw - 20px);
+  box-sizing: border-box;
+}
+
+/* ---------- Cards / grids ---------- */
+.cards-grid,
+.chart-grid,
+.document-grid,
+.recent-grid,
+.quick-grid,
+.storage-grid,
+.profile-form {
+  width: 100%;
+  min-width: 0;
+}
+
+.cards-grid > *,
+.chart-grid > *,
+.document-grid > *,
+.recent-grid > *,
+.quick-grid > *,
+.storage-grid > *,
+.profile-form > * {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* ---------- Long filenames / emails / UIDs ---------- */
+.document-card h3,
+.document-card p,
+.document-card span,
+.recent-content h3,
+.recent-content p,
+.recent-meta span,
+.owner-copy,
+.owner-copy strong,
+.owner-copy small,
+.notification-center,
+.notification-center h4,
+.notification-message,
+.notification-sender,
+.profile-header,
+.form-group,
+.form-group label,
+.setting-item,
+.setting-item h3,
+.setting-item p,
+.message-preview,
+.message-full,
+.subscriber-email,
+.uid {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* ---------- Upload / AI / analytics components ---------- */
+.upload-card,
+.upload-area,
+.file-card,
+.file-left,
+.file-info,
+.ai-card,
+.ai-header,
+.chat-box,
+.chat-input,
+.chart-card,
+.category-chart,
+.recent-section,
+.recent-item,
+.quick-actions,
+.storage-card {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.file-left,
+.file-info {
+  flex: 1 1 auto;
+}
+
+.chat-message {
+  max-width: min(80%, 720px);
+  overflow-wrap: anywhere;
+}
+
+.chat-input input {
+  min-width: 0;
+}
+
+/* Recharts / canvas containers must not force page width. */
+.chart-card > *,
+.category-chart > *,
+.chart-card .recharts-responsive-container,
+.category-chart .recharts-responsive-container {
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+/* ---------- Documents toolbar ---------- */
+.documents-page,
+.favorites-page,
+.notifications-page,
+.profile-page,
+.settings-page {
+  width: 100%;
+  min-width: 0;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: visible;
+}
+
+.documents-toolbar,
+.notification-toolbar {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.documents-toolbar > *,
+.notification-toolbar > * {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.documents-toolbar .search-box,
+.notification-toolbar .search-box {
+  min-width: 0;
+  width: 100%;
+}
+
+.documents-toolbar input,
+.notification-toolbar input,
+.documents-toolbar select,
+.notification-toolbar select {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* ---------- Preview / storage dialogs ---------- */
+.preview-overlay,
+.storage-details-overlay,
+.admin-modal-backdrop {
+  overscroll-behavior: contain;
+}
+
+.preview-modal,
+.storage-details-sheet,
+.admin-modal {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.preview-title,
+.preview-title h2,
+.preview-title span,
+.storage-details-title,
+.storage-details-title h2,
+.storage-details-title p {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.preview-body,
+.storage-details-body,
+.admin-modal {
+  -webkit-overflow-scrolling: touch;
+}
+
+.preview-frame,
+.preview-video,
+.preview-image,
+.pdf-viewer-shell {
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* ---------- Admin tables: scroll the table, not the whole page ---------- */
+.admin-layout,
+.admin-main,
+.admin-content {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.admin-content {
+  overflow: visible;
+}
+
+.admin-card,
+.table-card,
+.section-head {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.admin-table-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+
+.admin-table-wrap table {
+  max-width: none;
+}
+
+.owner-cell {
+  min-width: 180px;
+}
+
+.actions {
+  white-space: nowrap;
+}
+
+/* ---------- Touch targets ---------- */
+@media (pointer: coarse) {
+  .document-actions button,
+  .notification-actions button,
+  .notification-btn,
+  .theme-toggle,
+  .profile-box,
+  .dv-sidebar-link,
+  .dv-notification-btn,
+  .dv-logout-btn,
+  .toolbar-btn,
+  .admin-nav button,
+  .admin-sidebar-bottom button,
+  .admin-menu-btn {
+    min-height: 42px;
+  }
+
+  .document-actions button,
+  .notification-actions button {
+    min-width: 42px;
+  }
+}
+
+/* ---------- Tablet ---------- */
+@media (max-width: 992px) {
+  .app-page-main {
+    margin-left: 0 !important;
+  }
+
+  .app-page-content {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .dashboard-content {
+    width: 100%;
+  }
+
+  .cards-grid,
+  .chart-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-card,
+  .category-chart {
+    margin-top: 18px;
+    padding: 18px;
+  }
+
+  .recent-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .recent-item {
+    width: 100%;
+  }
+
+  .admin-main {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+/* ---------- Mobile app chrome ---------- */
+@media (max-width: 720px) {
+  .app-page-content {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    padding-bottom: 24px !important;
+  }
+
+  .dashboard-content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .dashboard-section {
+    width: 100%;
+  }
+
+  .section-title {
+    gap: 10px;
+  }
+
+  .section-title h2 {
+    font-size: clamp(21px, 6vw, 28px);
+  }
+
+  .section-title p {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .upload-card,
+  .ai-card,
+  .quick-actions,
+  .storage-card,
+  .recent-section {
+    border-radius: 18px;
+  }
+
+  .upload-card,
+  .ai-card,
+  .quick-actions {
+    padding: 18px;
+  }
+
+  .ai-header {
+    gap: 12px;
+  }
+
+  .ai-header h2,
+  .quick-header h2 {
+    font-size: 25px;
+  }
+
+  .ai-tools {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .chat-box {
+    height: min(300px, 45vh);
+    padding: 12px;
+  }
+
+  .chat-message {
+    max-width: 92%;
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+
+  .chat-input {
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .chat-input input {
+    width: auto;
+    min-height: 50px;
+    padding: 12px 14px;
+  }
+
+  .chat-input button {
+    width: 52px;
+    min-width: 52px;
+    height: 50px;
+  }
+
+  .recent-item {
+    padding: 17px;
+    gap: 14px;
+  }
+
+  .recent-bottom {
+    align-items: stretch;
+  }
+
+  .recent-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .recent-actions button {
+    min-width: 42px;
+  }
+
+  .document-actions {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .document-actions button {
+    min-width: 0;
+  }
+
+  .storage-header {
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .storage-header > div {
+    min-width: 0;
+  }
+
+  .storage-header h3 {
+    overflow-wrap: anywhere;
+  }
+
+  .storage-info {
+    flex-wrap: wrap;
+    gap: 10px 16px;
+  }
+
+  .notifications-header,
+  .documents-header,
+  .profile-header {
+    min-width: 0;
+  }
+
+  .notifications-header h1,
+  .documents-header h1 {
+    overflow-wrap: anywhere;
+  }
+
+  .notification-card {
+    min-width: 0;
+  }
+
+  .notification-center {
+    min-width: 0;
+  }
+
+  .notification-actions {
+    flex-wrap: wrap;
+  }
+
+  .profile-card,
+  .settings-card {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .setting-item {
+    width: 100%;
+  }
+
+  .setting-item > * {
+    max-width: 100%;
+  }
+
+  .admin-content {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  .admin-stats {
+    width: 100%;
+  }
+
+  .admin-card {
+    overflow: hidden;
+  }
+
+  .admin-table-wrap {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+/* ---------- Small phones ---------- */
+@media (max-width: 480px) {
+  .app-page-content {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .dashboard-section {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .ai-tools {
+    grid-template-columns: 1fr;
+  }
+
+  .ai-header h2,
+  .quick-header h2 {
+    font-size: 23px;
+  }
+
+  .ai-header p,
+  .quick-header p {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .chat-input {
+    gap: 7px;
+  }
+
+  .chat-input input {
+    font-size: 14px;
+  }
+
+  .document-actions {
+    gap: 7px;
+  }
+
+  .document-actions button {
+    height: 44px;
+    font-size: 15px;
+  }
+
+  .document-info {
+    gap: 8px;
+  }
+
+  .recent-item {
+    padding: 14px;
+  }
+
+  .recent-content h3 {
+    font-size: 17px;
+  }
+
+  .storage-card,
+  .upload-card,
+  .ai-card,
+  .quick-actions {
+    padding: 15px;
+  }
+
+  .preview-overlay {
+    padding: 0 !important;
+  }
+
+  .preview-modal {
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: 100dvh !important;
+    height: 100dvh !important;
+    border-radius: 0 !important;
+  }
+
+  .storage-details-sheet {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .admin-topbar {
+    width: 100%;
+  }
+
+  .admin-account {
+    min-width: 0;
+  }
+
+  .admin-modal-backdrop {
+    padding: 10px !important;
+  }
+
+  .admin-modal {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+/* ---------- Very small phones ---------- */
+@media (max-width: 360px) {
+  .app-page-content {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+
+  .document-card {
+    padding: 13px;
+  }
+
+  .document-actions {
+    gap: 5px;
+  }
+
+  .document-actions button {
+    font-size: 14px;
+  }
+
+  .notification-card {
+    padding: 12px;
+  }
+
+  .notifications-page,
+  .documents-page,
+  .favorites-page,
+  .profile-page,
+  .settings-page {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+/* ---------- Landscape phones / short viewports ---------- */
+@media (max-height: 560px) and (max-width: 992px) {
+  .topbar {
+    top: max(6px, env(safe-area-inset-top)) !important;
+  }
+
+  .app-page-content {
+    padding-top: 94px !important;
+  }
+
+  .dashboard-content {
+    padding-top: 82px;
+  }
+
+  .notification-dropdown,
+  .profile-dropdown {
+    max-height: calc(100dvh - 80px);
+  }
+
+  .preview-modal {
+    max-height: 100dvh;
+  }
+}
+
+/* ---------- Reduced motion / accessibility ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* =========================================================
+   v1.0.50 — FLUID AUTO-FIT LAYOUT LAYER
+   Keeps every screen fluid instead of relying on fixed widths.
+   This layer intentionally comes last so it wins over older
+   component-specific breakpoints without changing functionality.
+========================================================= */
+
+:root {
+  --dv-safe-top: env(safe-area-inset-top, 0px);
+  --dv-safe-right: env(safe-area-inset-right, 0px);
+  --dv-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --dv-safe-left: env(safe-area-inset-left, 0px);
+  --dv-page-gutter: clamp(10px, 2vw, 40px);
+}
+
+html {
+  min-width: 320px;
+  overflow-x: hidden;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-width: 320px;
+  padding: 0;
+  overscroll-behavior-x: none;
+}
+
+/* Prevent fixed-width children from creating an invisible second page. */
+.app-page-shell,
+.app-page-main,
+.dashboard,
+.dashboard-content,
+.dashboard-section,
+.documents-page,
+.favorites-page,
+.notifications-page,
+.profile-page,
+.settings-page,
+.admin-layout,
+.admin-main,
+.admin-content {
+  min-width: 0 !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+}
+
+/* Fluid authenticated content. */
+.app-page-content {
+  padding-left: clamp(12px, 2vw, 40px);
+  padding-right: clamp(12px, 2vw, 40px);
+  padding-bottom: max(24px, var(--dv-safe-bottom));
+}
+
+/* Keep grids fluid at every intermediate width (not only at breakpoints). */
+.cards-grid,
+.chart-grid,
+.document-grid,
+.recent-grid,
+.quick-grid,
+.storage-grid,
+.profile-form {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+}
+
+/* Never let a flex row push its sibling off-screen. */
+.section-title,
+.dashboard-footer,
+.documents-header,
+.notifications-header,
+.profile-header,
+.setting-item,
+.storage-header,
+.storage-info,
+.recent-bottom,
+.file-left,
+.file-actions,
+.document-card,
+.document-info,
+.admin-topbar,
+.admin-header,
+.admin-card-header {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Fluid typography prevents clipping on narrow and ultra-wide screens. */
+.dashboard h1,
+.dashboard h2,
+.dashboard h3,
+.documents-page h1,
+.favorites-page h1,
+.notifications-page h1,
+.profile-page h1,
+.settings-page h1,
+.admin-content h1 {
+  overflow-wrap: anywhere;
+  line-height: 1.15;
+}
+
+/* Media must shrink to its containing block. */
+img,
+video,
+canvas,
+iframe,
+object,
+embed {
+  height: auto;
+}
+
+/* Full-width controls without accidental minimum widths. */
+button,
+input,
+select,
+textarea {
+  max-width: 100%;
+}
+
+/* Touch devices get comfortable targets, while desktop keeps compact controls. */
+@media (pointer: coarse) {
+  button,
+  [role="button"],
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Medium laptops/tablets: use available width instead of desktop fixed offsets. */
+@media (min-width: 993px) and (max-width: 1240px) {
+  .dv-sidebar { width: 250px !important; }
+  .dv-sidebar.collapsed { width: 82px !important; }
+  .dashboard-content,
+  .app-page-main { margin-left: 0 !important; }
+  .dashboard-content { padding-left: 270px !important; }
+  .topbar { left: 270px !important; }
+  .dashboard:has(.dv-sidebar.collapsed) .topbar { left: 102px !important; }
+  .dashboard:has(.dv-sidebar.collapsed) .dashboard-content { padding-left: 102px !important; }
+}
+
+/* Tablet and phones: fixed sidebar becomes a drawer; content uses full width. */
+@media (max-width: 992px) {
+  .dashboard-content,
+  .app-page-main {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+
+  .dashboard-content {
+    padding-left: clamp(8px, 2vw, 20px) !important;
+    padding-right: clamp(8px, 2vw, 20px) !important;
+  }
+
+  .app-page-content {
+    padding-left: clamp(10px, 2.5vw, 24px) !important;
+    padding-right: clamp(10px, 2.5vw, 24px) !important;
+  }
+
+  .dashboard-section {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+/* Phones: one-column flow, no clipped action rows. */
+@media (max-width: 600px) {
+  .cards-grid,
+  .chart-grid,
+  .document-grid,
+  .recent-grid,
+  .quick-grid,
+  .storage-grid,
+  .profile-form {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .documents-toolbar,
+  .notification-toolbar,
+  .documents-header,
+  .notifications-header,
+  .section-title,
+  .setting-item,
+  .storage-header,
+  .recent-bottom {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .documents-toolbar .search-box,
+  .notification-toolbar .search-box {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .documents-toolbar select,
+  .notification-toolbar select,
+  .documents-toolbar button,
+  .notification-toolbar button {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .storage-info {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .document-card,
+  .recent-item,
+  .notification-card,
+  .profile-card,
+  .settings-card,
+  .admin-card {
+    max-width: 100% !important;
+  }
+
+  .document-actions {
+    width: 100%;
+  }
+
+  .document-actions button {
+    min-width: 0;
+  }
+
+  .chat-box {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .chat-message {
+    max-width: 94%;
+  }
+}
+
+/* Very small phones: preserve readability without horizontal scrolling. */
+@media (max-width: 380px) {
+  .app-page-content,
+  .dashboard-content {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+
+  .documents-page,
+  .favorites-page,
+  .notifications-page,
+  .profile-page,
+  .settings-page {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .storage-info {
+    grid-template-columns: 1fr;
+  }
+
+  .topbar {
+    gap: 6px !important;
+  }
+
+  .topbar .search-box {
+    padding-left: 9px !important;
+    padding-right: 6px !important;
+  }
+}
+
+/* Landscape phone/tablet: don't let short viewports clip dialogs or forms. */
+@media (orientation: landscape) and (max-height: 600px) {
+  .dv-sidebar {
+    max-height: 100dvh !important;
+  }
+
+  .preview-modal,
+  .storage-details-sheet,
+  .admin-modal,
+  .notification-dropdown,
+  .profile-dropdown {
+    max-height: calc(100dvh - 16px) !important;
+  }
+
+  .chat-box {
+    height: min(260px, 48dvh) !important;
+  }
+}
+
+/* Safe areas for installed PWA / notched devices. */
+@supports (padding: max(0px)) {
+  .topbar {
+    padding-top: max(8px, var(--dv-safe-top));
+  }
+
+  .dv-sidebar {
+    padding-left: max(12px, var(--dv-safe-left));
+    padding-right: max(12px, var(--dv-safe-right));
+    padding-bottom: max(12px, var(--dv-safe-bottom));
+  }
+
+  .app-page-content {
+    padding-bottom: max(24px, var(--dv-safe-bottom));
+  }
+}
+
+/* Keyboard focus must remain visible on every input/button. */
+:where(button, a, input, select, textarea, [tabindex]):focus-visible {
+  outline: 3px solid rgba(37, 99, 235, .35);
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   v1.0.49 — TRUE FLUID VIEWPORT HARDENING
+   Fixes the remaining fixed/min-width overflow seen on the
+   Documents screen and applies the same fluid contract to
+   every authenticated page.
+========================================================= */
+
+/* A page must never become wider than the content viewport. */
+.app-page-main,
+.app-page-content,
+.documents-page,
+.favorites-page,
+.notifications-page,
+.profile-page,
+.settings-page,
+.admin-main,
+.admin-content,
+.dashboard-content {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* Documents: the actual class is .documents-grid (plural). */
+.documents-grid {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: clamp(14px, 2vw, 28px);
+  margin-top: clamp(18px, 2.5vw, 30px);
+  align-items: stretch;
+}
+
+.documents-grid > .document-card,
+.documents-grid > .empty-state {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Document toolbar: fluid on desktop, wrapping at intermediate widths. */
+.documents-toolbar {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) repeat(2, minmax(130px, 180px)) repeat(3, minmax(72px, auto));
+  align-items: stretch;
+  gap: clamp(8px, 1.1vw, 15px);
+}
+
+.documents-toolbar .search-box {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.documents-toolbar select,
+.documents-toolbar .toolbar-btn {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.documents-toolbar .toolbar-btn {
+  padding-inline: clamp(10px, 1.2vw, 20px);
+  white-space: nowrap;
+}
+
+/* Never let document metadata force a card wider than its grid track. */
+.document-card,
+.document-info,
+.document-info span,
+.document-actions {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.document-info span {
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.document-actions {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* Fixed app chrome follows the actual sidebar width. */
+@media (min-width: 993px) {
+  .app-page-main { margin-left: 290px; }
+  .topbar { left: 320px; right: clamp(16px, 2vw, 30px); }
+  .app-page-shell:has(.dv-sidebar.collapsed) .app-page-main { margin-left: 90px; }
+  .app-page-shell:has(.dv-sidebar.collapsed) .topbar { left: 120px; }
+}
+
+/* Intermediate desktop/tablet: let toolbar wrap before anything overflows. */
+@media (max-width: 1250px) and (min-width: 993px) {
+  .documents-toolbar {
+    grid-template-columns: minmax(220px, 1fr) repeat(2, minmax(130px, 1fr));
+  }
+  .documents-toolbar .toolbar-btn {
+    width: 100%;
+  }
+}
+
+/* Tablet: content uses the full viewport and toolbar becomes 2 rows. */
+@media (max-width: 992px) {
+  .app-page-main { margin-left: 0 !important; width: 100%; }
+  .app-page-content { width: 100%; max-width: 100%; }
+
+  .documents-toolbar {
+    grid-template-columns: minmax(0, 1fr) repeat(2, minmax(120px, 1fr));
+  }
+
+  .documents-toolbar .search-box {
+    grid-column: 1 / -1;
+  }
+
+  .documents-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr));
+  }
+}
+
+/* Phones: every toolbar control gets its own safe track; no horizontal scroll. */
+@media (max-width: 700px) {
+  .app-page-content {
+    padding-left: clamp(8px, 3vw, 14px) !important;
+    padding-right: clamp(8px, 3vw, 14px) !important;
+  }
+
+  .documents-page,
+  .favorites-page,
+  .notifications-page,
+  .profile-page,
+  .settings-page {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .documents-toolbar {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    padding: 14px;
+  }
+
+  .documents-toolbar .search-box {
+    grid-column: 1 / -1;
+  }
+
+  .documents-toolbar select,
+  .documents-toolbar .toolbar-btn {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .documents-toolbar .toolbar-btn {
+    min-height: 50px;
+  }
+
+  .documents-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .document-card {
+    width: 100%;
+  }
+}
+
+/* Very small phones: keep every control readable without shrinking into a mess. */
+@media (max-width: 380px) {
+  .documents-toolbar {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .documents-toolbar .search-box,
+  .documents-toolbar select,
+  .documents-toolbar .toolbar-btn {
+    grid-column: 1 / -1;
+  }
+
+  .document-actions {
+    gap: 6px;
+  }
+
+  .document-actions button {
+    min-width: 0;
+    padding-inline: 8px;
+  }
+}
+
+/* Universal protection for flex/grid children at odd viewport sizes. */
+.dashboard-section,
+.dashboard-card,
+.chart-card,
+.quick-actions,
+.ai-card,
+.upload-card,
+.storage-card,
+.recent-section,
+.recent-card,
+.recent-item,
+.notification-card,
+.profile-card,
+.settings-card,
+.admin-card,
+.table-card,
+.about-card,
+.feature-card,
+.works-card,
+.why-card,
+.testimonial-card,
+.glass-card {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Tables scroll inside their own wrapper; the page itself stays fixed-width safe. */
+.admin-table-wrap,
+.table-card,
+.admin-card {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Dropdowns and dialogs must stay inside the viewport on narrow screens. */
+.notification-dropdown,
+.profile-dropdown,
+.preview-modal,
+.storage-details-sheet,
+.admin-modal,
+.reply-modal {
+  box-sizing: border-box;
+  max-width: calc(100vw - 16px) !important;
+}
+
+/* Avoid expensive hover transforms on touch devices. */
+@media (hover: none), (pointer: coarse) {
+  .document-card:hover,
+  .dashboard-card:hover,
+  .toolbar-btn:hover,
+  .document-actions button:hover,
+  .quick-card:hover {
+    transform: none;
+  }
+}
+
+/* Preserve smoothness on low-power/mobile devices. */
+@media (max-width: 700px) {
+  .document-card::before {
+    display: none;
+  }
+}
+
+/* =========================================================
+   v1.0.50 — TRUE FLUID PAGE / DOCUMENT GRID FIX
+   The previous responsive layer used the singular .document-grid
+   selector while the Documents page renders .documents-grid.
+   These rules make the actual rendered page fluid and prevent
+   desktop cards/toolbars from exceeding the available main area.
+========================================================= */
+
+.app-page-main {
+  width: calc(100% - 290px) !important;
+  max-width: calc(100% - 290px) !important;
+  box-sizing: border-box;
+}
+
+.app-page-content {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+  overflow-x: clip;
+}
+
+.documents-page,
+.favorites-page,
+.notifications-page,
+.profile-page,
+.settings-page {
+  width: 100% !important;
+  max-width: none !important;
+  box-sizing: border-box;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.documents-toolbar {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto auto auto auto auto;
+  align-items: center;
+  width: 100% !important;
+  box-sizing: border-box;
+}
+
+.documents-toolbar .search-box {
+  width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box;
+}
+
+.documents-toolbar select,
+.documents-toolbar .toolbar-btn {
+  min-width: 0 !important;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.documents-grid {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box;
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)) !important;
+  gap: clamp(16px, 2vw, 28px) !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.documents-grid > .document-card {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+}
+
+.documents-list {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box;
+}
+
+.documents-list > .document-card {
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+/* Never let card internals widen their grid track. */
+.documents-grid .document-card > *,
+.documents-list .document-card > * {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.documents-grid .document-card h3 {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Large desktop: use 4 cards only when four genuinely fit. */
+@media (min-width: 1241px) {
+  .documents-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+  }
+}
+
+/* Medium desktop / tablet landscape: allow 2–3 fluid cards. */
+@media (max-width: 1240px) and (min-width: 993px) {
+  .app-page-main {
+    width: calc(100% - 250px) !important;
+    max-width: calc(100% - 250px) !important;
+  }
+
+  .documents-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr)) !important;
+  }
+
+  .documents-toolbar {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+  }
+
+  .documents-toolbar .search-box {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 992px) {
+  .app-page-main {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .documents-toolbar {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+  }
+
+  .documents-toolbar .search-box {
+    grid-column: 1 / -1;
+  }
+
+  .documents-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)) !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .documents-page {
+    padding: 20px 0 40px !important;
+  }
+
+  .documents-toolbar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    padding: 14px !important;
+  }
+
+  .documents-toolbar .search-box {
+    grid-column: 1 / -1;
+  }
+
+  .documents-toolbar select,
+  .documents-toolbar .toolbar-btn {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .documents-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 16px !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .documents-toolbar {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .documents-toolbar .search-box,
+  .documents-toolbar select,
+  .documents-toolbar .toolbar-btn {
+    grid-column: 1;
+  }
+
+  .document-card {
+    padding: 16px !important;
+  }
+}
+
+/* Collapsed desktop sidebar must also recalculate the main area. */
+@media (min-width: 993px) {
+  .app-page-shell:has(.dv-sidebar.collapsed) .app-page-main {
+    width: calc(100% - 90px) !important;
+    max-width: calc(100% - 90px) !important;
+  }
+}
+
+/* Avoid clipping from browser-level horizontal overflow while preserving
+   intentional horizontal scrolling inside data tables. */
+body,
+#root,
+.app-page-shell,
+.app-page-main,
+.app-page-content {
+  overflow-x: clip !important;
+}
+
+.admin-table-wrap {
+  overflow-x: auto !important;
+}

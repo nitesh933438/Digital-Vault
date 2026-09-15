@@ -1,0 +1,24 @@
+{
+  "id": "./",
+  "name": "Digital Vault",
+  "short_name": "Digital Vault",
+  "description": "Secure cloud-based digital document management system.",
+  "lang": "en-IN",
+  "start_url": "./#/",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "browser"],
+  "background_color": "#f4f7fb",
+  "theme_color": "#2563eb",
+  "orientation": "any",
+  "categories": ["productivity", "utilities"],
+  "prefer_related_applications": false,
+  "icons": [
+    {"src":"./icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"./icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ],
+  "shortcuts": [
+    {"name":"My Documents","short_name":"Documents","url":"./#/documents","icons":[{"src":"./icon-192.png","sizes":"192x192","type":"image/png"}]},
+    {"name":"Dashboard","short_name":"Dashboard","url":"./#/dashboard","icons":[{"src":"./icon-192.png","sizes":"192x192","type":"image/png"}]}
+  ]
+}

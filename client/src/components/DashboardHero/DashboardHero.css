@@ -1,0 +1,908 @@
+/* =====================================================
+   DASHBOARD HERO
+===================================================== */
+
+.dashboardHero{
+  position:relative;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:40px;
+  padding:50px;
+  border-radius:30px;
+  margin-bottom:35px;
+  overflow:hidden;
+
+  background:linear-gradient(
+      135deg,
+      #2563eb 0%,
+      #4f46e5 40%,
+      #7c3aed 100%
+  );
+
+  color:#fff;
+
+  box-shadow:
+      0 25px 60px rgba(37,99,235,.20);
+
+  isolation:isolate;
+}
+
+/* =========================
+BACKGROUND EFFECT
+========================= */
+
+.dashboardHero::before{
+
+  content:"";
+
+  position:absolute;
+
+  width:420px;
+  height:420px;
+
+  right:-120px;
+  top:-150px;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.12);
+
+  filter:blur(35px);
+
+}
+
+.dashboardHero::after{
+
+  content:"";
+
+  position:absolute;
+
+  width:260px;
+  height:260px;
+
+  left:-80px;
+  bottom:-90px;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.08);
+
+  filter:blur(25px);
+
+}
+
+/* =========================
+LEFT
+========================= */
+
+.hero-content{
+
+  position:relative;
+
+  z-index:2;
+
+  flex:1;
+
+  max-width:720px;
+
+}
+
+.hero-badge{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  padding:10px 18px;
+
+  margin-bottom:24px;
+
+  border-radius:50px;
+
+  background:rgba(255,255,255,.18);
+
+  border:1px solid rgba(255,255,255,.20);
+
+  backdrop-filter:blur(16px);
+
+  font-size:14px;
+
+  font-weight:700;
+
+}
+
+.hero-badge svg{
+
+  color:#fde68a;
+
+}
+
+.hero-content h1{
+
+  font-size:52px;
+
+  line-height:1.2;
+
+  font-weight:800;
+
+  margin-bottom:18px;
+
+}
+
+.hero-content h1 span{
+
+  color:#fde68a;
+
+}
+
+.hero-content p{
+
+  max-width:620px;
+
+  line-height:1.8;
+
+  font-size:17px;
+
+  opacity:.95;
+
+  margin-bottom:35px;
+
+}
+
+/* =========================
+BUTTONS
+========================= */
+
+.hero-buttons{
+
+  display:flex;
+
+  gap:18px;
+
+  flex-wrap:wrap;
+
+  margin-bottom:35px;
+
+}
+
+.heroPrimary,
+.heroSecondary{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:10px;
+
+  border:none;
+
+  cursor:pointer;
+
+  padding:15px 28px;
+
+  border-radius:14px;
+
+  font-size:15px;
+
+  font-weight:700;
+
+  transition:.35s;
+
+}
+
+.heroPrimary{
+
+  background:#fff;
+
+  color:#2563eb;
+
+}
+
+.heroPrimary:hover{
+
+  transform:translateY(-5px);
+
+  box-shadow:0 18px 35px rgba(255,255,255,.25);
+
+}
+
+.heroSecondary{
+
+  background:rgba(255,255,255,.15);
+
+  color:#fff;
+
+  border:1px solid rgba(255,255,255,.20);
+
+  backdrop-filter:blur(15px);
+
+}
+
+.heroSecondary:hover{
+
+  transform:translateY(-5px);
+
+  background:rgba(255,255,255,.25);
+
+}
+
+/* =====================================================
+   MINI CARDS
+===================================================== */
+
+.hero-mini-cards{
+
+  display:grid;
+
+  grid-template-columns:repeat(3,1fr);
+
+  gap:18px;
+
+}
+
+.mini-card{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:15px;
+
+  padding:18px;
+
+  border-radius:18px;
+
+  background:rgba(255,255,255,.12);
+
+  border:1px solid rgba(255,255,255,.18);
+
+  backdrop-filter:blur(18px);
+
+  transition:.35s;
+
+}
+
+.mini-card:hover{
+
+  transform:translateY(-6px);
+
+  background:rgba(255,255,255,.20);
+
+}
+
+.mini-card svg{
+
+  width:48px;
+
+  height:48px;
+
+  padding:12px;
+
+  border-radius:14px;
+
+  background:rgba(255,255,255,.20);
+
+  font-size:20px;
+
+}
+
+.mini-card h3{
+
+  font-size:22px;
+
+  font-weight:700;
+
+  margin-bottom:4px;
+
+}
+
+.mini-card span{
+
+  font-size:14px;
+
+  opacity:.85;
+
+}
+
+/* =====================================================
+   RIGHT SIDE
+===================================================== */
+
+.hero-side{
+
+  position:relative;
+
+  z-index:2;
+
+  width:360px;
+
+  flex-shrink:0;
+
+}
+
+.glass-card{
+
+  padding:28px;
+
+  border-radius:24px;
+
+  background:rgba(255,255,255,.14);
+
+  border:1px solid rgba(255,255,255,.18);
+
+  backdrop-filter:blur(25px);
+
+  box-shadow:
+
+      0 20px 45px rgba(0,0,0,.18);
+
+}
+
+.glass-header{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  margin-bottom:24px;
+
+}
+
+.glass-header h3{
+
+  font-size:22px;
+
+  font-weight:700;
+
+}
+
+.glass-header p{
+
+  font-size:14px;
+
+  opacity:.8;
+
+  margin-top:4px;
+
+}
+
+.glass-header svg{
+
+  font-size:28px;
+
+  color:#fde68a;
+
+}
+
+.glass-card h2{
+
+  font-size:42px;
+
+  font-weight:800;
+
+  margin-bottom:22px;
+
+}
+
+/* =====================================================
+   STORAGE PROGRESS
+===================================================== */
+
+.progress{
+
+  width:100%;
+
+  height:12px;
+
+  border-radius:20px;
+
+  overflow:hidden;
+
+  background:rgba(255,255,255,.18);
+
+  margin-bottom:28px;
+
+}
+
+.progress-fill{
+
+  height:100%;
+
+  border-radius:20px;
+
+  background:linear-gradient(
+
+      90deg,
+
+      #22c55e,
+
+      #84cc16,
+
+      #fde047
+
+  );
+
+  transition:width .6s ease;
+
+}
+
+/* =====================================================
+   STORAGE STATS
+===================================================== */
+
+.glass-stats{
+
+  display:grid;
+
+  grid-template-columns:repeat(3,1fr);
+
+  gap:15px;
+
+  margin-bottom:28px;
+
+}
+
+.glass-stats div{
+
+  text-align:center;
+
+  padding:18px 12px;
+
+  border-radius:16px;
+
+  background:rgba(255,255,255,.10);
+
+  transition:.3s;
+
+}
+
+.glass-stats div:hover{
+
+  transform:translateY(-4px);
+
+  background:rgba(255,255,255,.18);
+
+}
+
+.glass-stats svg{
+
+  font-size:22px;
+
+  margin-bottom:10px;
+
+  color:#fde68a;
+
+}
+
+.glass-stats h4{
+
+  font-size:18px;
+
+  font-weight:700;
+
+  margin-bottom:6px;
+
+}
+
+.glass-stats span{
+
+  font-size:13px;
+
+  opacity:.85;
+
+}
+
+/* =====================================================
+   LIVE CLOCK
+===================================================== */
+
+.clock-box{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:15px;
+
+  padding:18px;
+
+  border-radius:18px;
+
+  background:rgba(255,255,255,.12);
+
+  border:1px solid rgba(255,255,255,.18);
+
+  backdrop-filter:blur(18px);
+
+}
+
+.clock-box svg{
+
+  width:52px;
+
+  height:52px;
+
+  padding:14px;
+
+  border-radius:14px;
+
+  background:rgba(255,255,255,.18);
+
+  color:#fde68a;
+
+  font-size:22px;
+
+}
+
+.clock-box h4{
+
+  font-size:20px;
+
+  font-weight:700;
+
+  margin-bottom:5px;
+
+}
+
+.clock-box span{
+
+  font-size:14px;
+
+  opacity:.85;
+
+}
+
+/* =====================================================
+   FLOATING BALLS
+===================================================== */
+
+.floating{
+
+  position:absolute;
+
+  border-radius:50%;
+
+  pointer-events:none;
+
+  animation:float 7s ease-in-out infinite;
+
+  z-index:1;
+
+}
+
+.floating.one{
+
+  width:120px;
+
+  height:120px;
+
+  top:8%;
+
+  right:18%;
+
+  background:rgba(255,255,255,.08);
+
+}
+
+.floating.two{
+
+  width:80px;
+
+  height:80px;
+
+  bottom:15%;
+
+  left:40%;
+
+  background:rgba(255,255,255,.10);
+
+  animation-delay:1.5s;
+
+}
+
+.floating.three{
+
+  width:60px;
+
+  height:60px;
+
+  bottom:8%;
+
+  right:8%;
+
+  background:rgba(255,255,255,.14);
+
+  animation-delay:3s;
+
+}
+
+@keyframes float{
+
+  0%{
+
+    transform:translateY(0px);
+
+  }
+
+  50%{
+
+    transform:translateY(-18px);
+
+  }
+
+  100%{
+
+    transform:translateY(0px);
+
+  }
+
+}
+
+/* =====================================================
+   DARK MODE
+===================================================== */
+
+.dark .dashboardHero{
+
+  background:linear-gradient(
+
+      135deg,
+
+      #0f172a,
+
+      #1e293b,
+
+      #312e81
+
+  );
+
+}
+
+.dark .glass-card,
+
+.dark .mini-card,
+
+.dark .clock-box,
+
+.dark .heroSecondary,
+
+.dark .hero-badge{
+
+  background:rgba(255,255,255,.08);
+
+  border:1px solid rgba(255,255,255,.12);
+
+}
+
+/* =====================================================
+   LIGHT MODE
+===================================================== */
+
+.light .dashboardHero{
+
+  background:linear-gradient(
+
+      135deg,
+
+      #2563eb,
+
+      #4f46e5,
+
+      #7c3aed
+
+  );
+
+}
+
+/* =====================================================
+   RESPONSIVE DESIGN
+===================================================== */
+
+@media (max-width:1200px){
+
+  .dashboardHero{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    padding:40px;
+
+  }
+
+  .hero-side{
+
+    width:100%;
+
+  }
+
+  .glass-card{
+
+    width:100%;
+
+  }
+
+}
+
+@media (max-width:992px){
+
+  .hero-content h1{
+
+    font-size:40px;
+
+  }
+
+  .hero-content p{
+
+    font-size:15px;
+
+  }
+
+  .hero-mini-cards{
+
+    grid-template-columns:repeat(2,1fr);
+
+  }
+
+  .glass-stats{
+
+    grid-template-columns:repeat(3,1fr);
+
+  }
+
+}
+
+@media (max-width:768px){
+
+  .dashboardHero{
+
+    padding:25px;
+
+    gap:25px;
+
+    border-radius:20px;
+
+  }
+
+  .hero-content h1{
+
+    font-size:32px;
+
+  }
+
+  .hero-buttons{
+
+    flex-direction:column;
+
+    width:100%;
+
+  }
+
+  .heroPrimary,
+
+  .heroSecondary{
+
+    width:100%;
+
+  }
+
+  .hero-mini-cards{
+
+    grid-template-columns:1fr;
+
+  }
+
+  .glass-stats{
+
+    grid-template-columns:1fr;
+
+  }
+
+  .clock-box{
+
+    flex-direction:column;
+
+    text-align:center;
+
+  }
+
+}
+
+@media (max-width:480px){
+
+  .dashboardHero{
+
+    padding:18px;
+
+  }
+
+  .hero-badge{
+
+    font-size:12px;
+
+    padding:8px 14px;
+
+  }
+
+  .hero-content h1{
+
+    font-size:26px;
+
+  }
+
+  .hero-content p{
+
+    font-size:14px;
+
+    line-height:1.6;
+
+  }
+
+  .glass-card{
+
+    padding:20px;
+
+  }
+
+  .glass-header h3{
+
+    font-size:18px;
+
+  }
+
+  .glass-card h2{
+
+    font-size:32px;
+
+  }
+
+  .mini-card{
+
+    padding:14px;
+
+  }
+
+  .mini-card h3{
+
+    font-size:18px;
+
+  }
+
+  .floating{
+
+    display:none;
+
+  }
+
+}
+
+/* =====================================================
+   SMOOTH ANIMATIONS
+===================================================== */
+
+.dashboardHero *{
+
+  transition:all .3s ease;
+
+}
+
+.heroPrimary:active,
+
+.heroSecondary:active,
+
+.mini-card:active,
+
+.glass-stats div:active{
+
+  transform:scale(.97);
+
+}
+
+.storage-glass-clickable{cursor:pointer;outline:none;transition:transform .25s ease,box-shadow .25s ease}.storage-glass-clickable:hover{transform:translateY(-3px)}.storage-glass-clickable:focus-visible{box-shadow:0 0 0 4px rgba(37,99,235,.22)}

@@ -1,0 +1,474 @@
+/* =========================================================
+   DIGITAL VAULT — UNIVERSAL AUTO LAYOUT
+   v1.0.51
+   Fluid layout rules for every app page, viewport and mode.
+   This layer intentionally uses the available viewport width
+   instead of fixed component widths.
+========================================================= */
+
+:root {
+  --dv-sidebar-expanded: 290px;
+  --dv-sidebar-collapsed: 90px;
+  --dv-page-gutter: clamp(12px, 2vw, 40px);
+  --dv-content-max: 1600px;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+body,
+#root {
+  overflow-x: hidden;
+}
+
+/* ---------- Authenticated application shell ---------- */
+.app-page-shell {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  min-height: 100dvh;
+  overflow: visible;
+}
+
+.app-page-main {
+  width: calc(100% - var(--dv-sidebar-expanded));
+  max-width: calc(100% - var(--dv-sidebar-expanded));
+  min-width: 0;
+  margin-left: var(--dv-sidebar-expanded);
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  box-sizing: border-box;
+}
+
+.app-page-content {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding-left: clamp(12px, 2vw, 40px);
+  padding-right: clamp(12px, 2vw, 40px);
+  overflow: visible;
+}
+
+.app-page-shell:has(.dv-sidebar.collapsed) .app-page-main {
+  width: calc(100% - var(--dv-sidebar-collapsed));
+  max-width: calc(100% - var(--dv-sidebar-collapsed));
+  margin-left: var(--dv-sidebar-collapsed);
+}
+
+/* ---------- Fixed topbar always follows the content viewport ---------- */
+.app-page-main > .topbar {
+  left: calc(var(--dv-sidebar-expanded) + clamp(12px, 2vw, 30px));
+  right: clamp(12px, 2vw, 30px);
+  width: auto;
+  max-width: none;
+  box-sizing: border-box;
+}
+
+.app-page-shell:has(.dv-sidebar.collapsed) .topbar {
+  left: calc(var(--dv-sidebar-collapsed) + clamp(12px, 2vw, 30px));
+}
+
+/* ---------- Generic page containers ---------- */
+.documents-page,
+.favorites-page,
+.notifications-page,
+.profile-page,
+.settings-page,
+.privacy-page,
+.terms-page,
+.dashboard-content,
+.admin-content,
+.admin-main {
+  width: 100%;
+  max-width: var(--dv-content-max);
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* ---------- Every common grid is fluid ---------- */
+.cards-grid,
+.stats-grid,
+.chart-grid,
+.quick-grid,
+.recent-grid,
+.feature-grid,
+.works-grid,
+.testimonial-grid,
+.about-list,
+.storage-category-grid,
+.admin-grid,
+.contact-form-grid {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* ---------- Documents: auto-fit, never overflow ---------- */
+.documents-page {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.documents-toolbar {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) repeat(5, minmax(0, auto));
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box;
+}
+
+.documents-toolbar > * {
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+.documents-toolbar .search-box {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+.documents-toolbar select,
+.documents-toolbar .toolbar-btn {
+  width: auto;
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+.documents-grid {
+  display: grid !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 245px), 1fr)) !important;
+  gap: clamp(14px, 1.7vw, 28px) !important;
+  box-sizing: border-box;
+}
+
+.documents-grid > .document-card,
+.documents-list > .document-card {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  box-sizing: border-box;
+}
+
+.documents-list {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+.document-card,
+.document-card * {
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.document-card h3 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.document-actions {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* ---------- Forms / controls ---------- */
+form,
+.form-group,
+.profile-form,
+.settings-card,
+.profile-card,
+.contact-form-grid {
+  min-width: 0;
+  max-width: 100%;
+}
+
+input,
+textarea,
+select,
+button {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* ---------- Media and visual components ---------- */
+img,
+video,
+canvas,
+iframe,
+svg {
+  max-width: 100%;
+}
+
+.chart-card,
+.category-chart,
+.storage-card,
+.upload-card,
+.ai-card,
+.quick-actions,
+.recent-section,
+.glass-card,
+.feature-card,
+.works-card,
+.testimonial-card,
+.about-card,
+.faq-section,
+.contact-section {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* ---------- AI chat: compact and viewport-safe ---------- */
+.ai-card,
+.ai-header,
+.chat-box,
+.chat-input,
+.ai-tools {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.chat-box {
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+}
+
+.chat-message {
+  max-width: min(82%, 720px);
+  overflow-wrap: anywhere;
+}
+
+.chat-input {
+  display: flex;
+  width: 100%;
+}
+
+.chat-input input {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.chat-input button {
+  flex: 0 0 auto;
+}
+
+/* ---------- Tables scroll inside their own container ---------- */
+.admin-table-wrap {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto !important;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ---------- Modals never exceed viewport ---------- */
+.preview-overlay,
+.storage-details-overlay,
+.admin-modal-backdrop {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: auto;
+}
+
+.preview-modal,
+.storage-details-sheet,
+.admin-modal {
+  width: min(100%, 1100px);
+  max-width: calc(100vw - 24px);
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* ---------- Mobile / tablet: sidebar becomes drawer ---------- */
+@media (max-width: 992px) {
+  .app-page-main,
+  .app-page-shell:has(.dv-sidebar.collapsed) .app-page-main {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+  }
+
+  .app-page-main > .topbar,
+  .app-page-shell:has(.dv-sidebar.collapsed) .topbar {
+    left: clamp(58px, 10vw, 82px) !important;
+    right: clamp(10px, 2vw, 20px) !important;
+  }
+
+  .app-page-content {
+    padding-left: clamp(10px, 2vw, 24px);
+    padding-right: clamp(10px, 2vw, 24px);
+  }
+
+  .documents-toolbar {
+    grid-template-columns: minmax(0, 1fr) repeat(2, minmax(0, 1fr));
+  }
+
+  .documents-toolbar .search-box {
+    grid-column: 1 / -1;
+  }
+
+  .documents-toolbar select,
+  .documents-toolbar .toolbar-btn {
+    width: 100% !important;
+  }
+
+  .documents-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)) !important;
+  }
+
+  .cards-grid,
+  .stats-grid,
+  .chart-grid,
+  .admin-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ---------- Phones ---------- */
+@media (max-width: 700px) {
+  .app-page-main > .topbar,
+  .app-page-shell:has(.dv-sidebar.collapsed) .topbar {
+    left: 58px !important;
+    right: 10px !important;
+    top: 10px !important;
+  }
+
+  .app-page-content {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .documents-toolbar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    padding: 12px !important;
+  }
+
+  .documents-toolbar .search-box {
+    grid-column: 1 / -1;
+  }
+
+  .documents-toolbar select,
+  .documents-toolbar .toolbar-btn {
+    width: 100% !important;
+    min-height: 48px;
+  }
+
+  .documents-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 14px !important;
+  }
+
+  .cards-grid,
+  .stats-grid,
+  .chart-grid,
+  .admin-grid,
+  .feature-grid,
+  .works-grid,
+  .testimonial-grid,
+  .quick-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .ai-tools {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .chat-message {
+    max-width: 94%;
+  }
+
+  .profile-form,
+  .contact-form-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+
+/* ---------- Very small phones ---------- */
+@media (max-width: 420px) {
+  .documents-toolbar {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .documents-toolbar .search-box,
+  .documents-toolbar select,
+  .documents-toolbar .toolbar-btn {
+    grid-column: 1;
+  }
+
+  .ai-tools {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .document-card {
+    padding: clamp(12px, 4vw, 16px) !important;
+  }
+
+  .document-actions {
+    gap: 7px !important;
+  }
+}
+
+/* ---------- Landscape phones ---------- */
+@media (max-width: 900px) and (orientation: landscape) and (max-height: 560px) {
+  .app-page-main > .topbar,
+  .app-page-shell:has(.dv-sidebar.collapsed) .topbar {
+    top: 8px !important;
+  }
+
+  .app-page-content {
+    padding-top: 96px !important;
+  }
+
+  .dv-sidebar {
+    max-height: 100dvh;
+  }
+}
+
+/* ---------- Touch and reduced-motion ---------- */
+@media (pointer: coarse) {
+  button,
+  a,
+  select {
+    touch-action: manipulation;
+  }
+
+  .toolbar-btn,
+  .document-actions button,
+  .dv-sidebar-link,
+  .dv-notification-btn,
+  .dv-logout-btn {
+    min-height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

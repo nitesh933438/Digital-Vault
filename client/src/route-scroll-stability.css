@@ -1,0 +1,8 @@
+/* Route-scroll contract: normal app pages use the browser/document scroller. */
+html, body, #root { min-height: 100%; }
+body { overflow-x: hidden; overflow-y: auto; }
+.app-page-shell, .app-page-main, .app-page-content { min-width: 0; }
+.app-page-main { min-height: 100dvh; }
+/* Dashboard must never become a nested vertical scroll container. */
+.dashboard, .dashboard-content { overflow-y: visible !important; }
+.dashboard-content { min-width: 0; }

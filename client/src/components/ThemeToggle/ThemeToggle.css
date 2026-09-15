@@ -1,0 +1,33 @@
+.theme-toggle{
+
+width:55px;
+
+height:55px;
+
+border:none;
+
+border-radius:50%;
+
+background:linear-gradient(135deg,#2563eb,#4f46e5);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:24px;
+
+color:white;
+
+transition:.3s;
+
+}
+
+.theme-toggle:hover{
+
+transform:rotate(180deg) scale(1.08);
+
+box-shadow:0 10px 25px rgba(37,99,235,.35);
+
+}

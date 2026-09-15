@@ -1,0 +1,213 @@
+/* Digital Vault v1.0.53 — device-adaptive UI contract
+   Goal: no hidden controls, no page-level sideways overflow, and
+   intentional horizontal scrolling only inside dense control/table areas. */
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body, #root { width: 100%; max-width: 100%; }
+body { overflow-x: hidden; }
+
+/* Every major app container must be allowed to shrink. */
+.app-shell, .app-page-shell, .app-page-main, .app-page-content,
+.dashboard, .dashboard-content, main, section, article, .documents-page,
+.favorites-page, .notifications-page, .profile-page, .settings-page,
+.admin-page { min-width: 0 !important; max-width: 100% !important; }
+
+/* Fluid authenticated shell. */
+.app-page-main { width: calc(100% - 290px) !important; margin-left: 290px !important; }
+.app-page-content { width: 100% !important; padding-inline: clamp(10px, 2.2vw, 30px) !important; }
+
+/* Dense controls: wrap first, scroll only when a single row must remain intact. */
+.option-row, .action-row, .header-buttons, .nav-buttons,
+.notification-actions, .notification-admin-actions, .modal-actions,
+.recent-actions, .quick-actions, .documents-toolbar, .admin-nav,
+.pdf-page-toolbar, .zoom-toolbar {
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+.documents-toolbar {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: stretch !important;
+  gap: clamp(8px, 1.2vw, 15px) !important;
+}
+.documents-toolbar .search-box {
+  flex: 1 1 clamp(240px, 35vw, 520px) !important;
+  min-width: min(100%, 240px) !important;
+  width: auto !important;
+  max-width: 100% !important;
+}
+.documents-toolbar select,
+.documents-toolbar .toolbar-btn {
+  flex: 0 1 auto !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+.documents-toolbar .toolbar-btn { white-space: nowrap; }
+
+/* Universal fluid grids. */
+.documents-grid, .cards-grid, .stats-grid, .chart-grid, .admin-grid,
+.feature-grid, .works-grid, .testimonial-grid, .quick-grid,
+.storage-category-grid {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+.documents-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)) !important;
+}
+.documents-grid > *, .cards-grid > *, .stats-grid > *, .chart-grid > *,
+.admin-grid > *, .feature-grid > *, .works-grid > *, .testimonial-grid > *,
+.quick-grid > *, .storage-category-grid > * { min-width: 0 !important; max-width: 100% !important; }
+
+/* Text/media never become the source of an overflow. */
+img, video, canvas, svg { max-width: 100%; }
+h1, h2, h3, h4, h5, h6, p, span, a, td, th, label {
+  max-width: 100%;
+}
+.document-card, .document-card * { min-width: 0 !important; }
+.document-card h3, .document-card p, .document-card span {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* Intentional scroll zones: the user can reach every control instead of losing it. */
+.pdf-page-toolbar, .zoom-toolbar, .admin-nav {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  padding-bottom: 3px;
+}
+.pdf-page-toolbar > *, .zoom-toolbar > *, .admin-nav > * { flex: 0 0 auto !important; }
+.admin-table-wrap {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+
+/* Fixed overlays always remain reachable. */
+.preview-overlay, .storage-details-overlay, .admin-modal-backdrop,
+.notification-dropdown, .profile-dropdown {
+  max-width: 100vw !important;
+}
+.preview-modal, .storage-details-sheet, .admin-modal {
+  min-width: 0 !important;
+  max-width: calc(100vw - 16px) !important;
+}
+
+/* Desktop sidebar collapsed state. */
+@media (min-width: 993px) {
+  .app-page-shell:has(.dv-sidebar.collapsed) .app-page-main {
+    width: calc(100% - 90px) !important;
+    margin-left: 90px !important;
+  }
+}
+
+/* Small desktop / tablet / mobile desktop-mode: retain controls and allow
+   the header's dense action area to scroll horizontally when required. */
+@media (max-width: 1100px) and (min-width: 601px) {
+  .app-page-main,
+  .app-page-shell:has(.dv-sidebar.collapsed) .app-page-main {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+  .app-page-content { padding-inline: clamp(12px, 2.5vw, 24px) !important; }
+
+  .topbar,
+  .dashboard:has(.dv-sidebar.collapsed) .topbar {
+    left: 72px !important;
+    right: 10px !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+  .topbar > .search-box { flex: 1 1 320px !important; min-width: 280px !important; }
+  .topbar-right { flex: 0 0 auto !important; min-width: max-content !important; }
+  .topbar-right .live-time,
+  .topbar-right .cloud-status { display: flex !important; flex: 0 0 auto !important; }
+  .live-time { min-width: 105px !important; }
+  .cloud-status { min-width: 48px !important; }
+
+  .documents-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)) !important; }
+  .documents-toolbar .search-box { flex-basis: 100% !important; }
+  .documents-toolbar select, .documents-toolbar .toolbar-btn { flex: 1 1 calc(25% - 12px) !important; }
+}
+
+/* Phones: stack dense controls so nothing becomes microscopic. */
+@media (max-width: 600px) {
+  .app-page-main,
+  .app-page-shell:has(.dv-sidebar.collapsed) .app-page-main {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+  .app-page-content { padding-inline: 10px !important; }
+
+  .topbar,
+  .dashboard:has(.dv-sidebar.collapsed) .topbar {
+    left: 58px !important;
+    right: 8px !important;
+    width: auto !important;
+    overflow: visible !important;
+  }
+  .topbar-right .live-time,
+  .topbar-right .cloud-status { display: none !important; }
+
+  .documents-toolbar { width: 100% !important; }
+  .documents-toolbar .search-box,
+  .documents-toolbar select,
+  .documents-toolbar .toolbar-btn {
+    flex: 1 1 100% !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  .documents-grid { grid-template-columns: minmax(0, 1fr) !important; }
+
+  .header-buttons, .nav-buttons, .notification-actions,
+  .notification-admin-actions, .modal-actions, .recent-actions,
+  .quick-actions { width: 100%; flex-wrap: wrap !important; }
+  .header-buttons > *, .nav-buttons > *, .notification-actions > *,
+  .notification-admin-actions > *, .modal-actions > *, .recent-actions > * {
+    max-width: 100%; min-width: 0;
+  }
+}
+
+/* Very small screens: preserve readable tap targets. */
+@media (max-width: 380px) {
+  .app-page-content { padding-inline: 8px !important; }
+  .documents-toolbar { padding: 10px !important; }
+  .documents-toolbar .toolbar-btn,
+  .documents-toolbar select { min-height: 46px !important; }
+}
+
+/* Landscape phones: compact but fully reachable. */
+@media (max-width: 900px) and (orientation: landscape) and (max-height: 560px) {
+  .app-page-content { padding-top: 96px !important; }
+  .preview-modal, .storage-details-sheet, .admin-modal { max-height: calc(100dvh - 12px) !important; }
+}
+
+/* Touch targets and reduced motion. */
+@media (pointer: coarse) {
+  button, a, select { touch-action: manipulation; }
+  button, select { min-height: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
