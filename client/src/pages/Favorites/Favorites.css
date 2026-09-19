@@ -1,0 +1,94 @@
+/* ==========================================================
+   FAVORITES PAGE
+========================================================== */
+.favorites-page {
+  width: 100%;
+  min-height: 100dvh;
+  padding: 40px 46px 70px;
+  color: var(--text);
+  background: var(--bg);
+  overflow: visible;
+}
+
+.favorites-page .page-back-row {
+  margin-bottom: 24px;
+}
+
+.favorites-page h1 {
+  margin: 0 0 30px;
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1.2;
+  color: var(--text);
+}
+
+/* Real responsive grid instead of stacking every card at full width. */
+.favorites-page .document-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  align-items: start;
+}
+
+.favorites-page .document-grid > .document-card {
+  width: 100%;
+  min-width: 0;
+}
+
+.favorites-page .document-grid > p {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 56px 24px;
+  text-align: center;
+  border: 1px dashed var(--border);
+  border-radius: 22px;
+  background: var(--card);
+  color: var(--text);
+  box-shadow: var(--shadow);
+}
+
+@media (max-width: 900px) {
+  .favorites-page {
+    padding: 30px 24px 60px;
+  }
+
+  .favorites-page .document-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+}
+
+@media (max-width: 640px) {
+  .favorites-page {
+    padding: 20px 14px 45px;
+  }
+
+  .favorites-page .page-back-row {
+    margin-bottom: 18px;
+  }
+
+  .favorites-page h1 {
+    margin-bottom: 22px;
+    font-size: 27px;
+  }
+
+  .favorites-page .document-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 380px) {
+  .favorites-page {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+
+/* v11 shell-safe responsive layout */
+.favorites-page{min-width:0;max-width:100%;overflow:visible;}
+
+/* v11: shell-safe sizing and scroll */
+.favorites-page{width:100%;max-width:1400px;margin:0 auto;min-width:0;overflow:visible;}
+@media(max-width:700px){.favorites-page h1{font-size:30px}.favorites-page{padding:0}.favorites-page .document-grid{grid-template-columns:1fr}}

@@ -1,0 +1,22 @@
+.dv-install-banner{position:fixed;left:50%;top:18px;transform:translateX(-50%);width:min(920px,calc(100vw - 28px));z-index:2000;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:13px 14px 13px 16px;border:1px solid rgba(37,99,235,.16);border-radius:20px;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);box-shadow:0 18px 50px rgba(15,23,42,.18)}
+.dv-install-brand{display:flex;align-items:center;gap:12px;min-width:0}.dv-install-brand img{width:48px;height:48px;border-radius:14px;flex:none}.dv-install-brand div{display:flex;flex-direction:column;gap:3px;min-width:0}.dv-install-brand strong{font-size:15px;color:#0f172a}.dv-install-brand span{font-size:12px;color:#64748b;line-height:1.35}.dv-install-actions{display:flex;align-items:center;gap:8px;flex:none}.dv-install-now{border:0;border-radius:12px;padding:11px 15px;display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#2563eb,#4f46e5);color:#fff;font-weight:800;box-shadow:0 8px 20px rgba(37,99,235,.25)}.dv-install-close{width:38px;height:38px;border:0;border-radius:10px;background:#f1f5f9;color:#475569;display:grid;place-items:center}.dv-install-fab{position:fixed;right:22px;bottom:22px;z-index:1800;border:0;border-radius:999px;padding:12px 17px;display:flex;align-items:center;gap:9px;background:linear-gradient(135deg,#2563eb,#4f46e5);color:#fff;font-weight:800;box-shadow:0 12px 30px rgba(37,99,235,.3)}
+body[data-theme="dark"] .dv-install-banner{background:rgba(15,23,42,.96);border-color:rgba(147,197,253,.14)}body[data-theme="dark"] .dv-install-brand strong{color:#f8fafc}body[data-theme="dark"] .dv-install-brand span{color:#94a3b8}body[data-theme="dark"] .dv-install-close{background:#1e293b;color:#cbd5e1}
+@media(max-width:650px){.dv-install-banner{top:10px;align-items:flex-start;padding:12px;width:calc(100vw - 20px)}.dv-install-brand img{width:42px;height:42px}.dv-install-brand span{font-size:11px}.dv-install-now{padding:10px 12px;font-size:12px}.dv-install-close{width:34px;height:34px}.dv-install-actions{gap:5px}.dv-install-fab{right:14px;bottom:14px;padding:11px 14px;font-size:13px}}
+@media(max-width:460px){.dv-install-banner{flex-direction:column}.dv-install-actions{width:100%}.dv-install-now{flex:1;justify-content:center}.dv-install-close{flex:none}}
+
+/* ===== Final PWA install UX ===== */
+.dv-install-banner,
+.dv-install-fab,
+.dv-install-sidebar-btn { touch-action: manipulation; }
+.dv-install-banner { max-width: min(920px, calc(100vw - 20px)); }
+.dv-install-brand { flex: 1 1 auto; }
+.dv-install-brand span { max-width: 62ch; }
+@media (max-width: 650px) {
+  .dv-install-fab { bottom: max(14px, env(safe-area-inset-bottom)); }
+}
+
+
+.dv-install-banner{font-family:inherit;}
+.dv-install-banner button{touch-action:manipulation;}
+.dv-install-now{white-space:nowrap;}
+@media(max-width:380px){.dv-install-brand strong{font-size:14px}.dv-install-brand span{font-size:10px}.dv-install-now{font-size:11px;padding:9px 10px}}

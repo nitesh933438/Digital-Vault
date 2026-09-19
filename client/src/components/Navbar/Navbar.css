@@ -1,0 +1,164 @@
+.navbar{
+  width:100%;
+  height:86px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 clamp(20px,5vw,70px);
+  background:var(--card);
+  color:var(--text);
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:5000;
+  box-shadow:0 8px 28px rgba(15,23,42,.08);
+  border-bottom:1px solid var(--border);
+  transition:background .25s,color .25s,box-shadow .25s;
+}
+
+.logo{display:flex;align-items:center;gap:12px;color:var(--primary);text-decoration:none;min-width:0;font-size:clamp(25px,2.4vw,38px);font-weight:800;letter-spacing:-.7px;white-space:nowrap}
+.logo img{width:48px;height:48px;object-fit:contain;flex:0 0 auto}
+.logo span{overflow:hidden;text-overflow:ellipsis}
+
+.nav-links{display:flex;align-items:center;gap:clamp(24px,3.2vw,45px);list-style:none;margin:0;padding:0}
+.nav-links button{border:0;background:transparent;color:var(--text);font-size:19px;font-weight:650;padding:10px 2px;cursor:pointer;transition:color .2s}
+.nav-links button:hover{color:var(--primary)}
+
+.nav-buttons{display:flex;align-items:center;gap:14px}
+.loginBtn,.registerBtn{padding:12px 30px;border:0;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.loginBtn{background:var(--primary);color:#fff}.registerBtn{background:#0ea5e9;color:#fff}
+.loginBtn:hover,.registerBtn:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(37,99,235,.25)}
+
+.mobile-menu{display:none;width:44px;height:44px;border:1px solid var(--border);border-radius:12px;background:var(--secondary);color:var(--text);align-items:center;justify-content:center;font-size:28px}
+.mobile-nav-panel{display:none}
+
+body[data-theme="dark"] .navbar{box-shadow:0 10px 30px rgba(0,0,0,.28)}
+
+@media(max-width:1000px){
+  .navbar{height:78px;padding:0 18px}
+  .logo{font-size:28px}.logo img{width:42px;height:42px}
+  .nav-links,.nav-buttons{display:none}
+  .mobile-menu{display:flex}
+  .mobile-nav-panel{position:absolute;top:calc(100% + 8px);left:12px;right:12px;display:flex;flex-direction:column;gap:4px;padding:12px;background:var(--card);border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow);max-height:calc(100dvh - 100px);overflow:auto}
+  .mobile-nav-panel>button{width:100%;text-align:left;border:0;background:transparent;color:var(--text);font-size:17px;font-weight:650;padding:13px 14px;border-radius:10px}
+  .mobile-nav-panel>button:hover{background:var(--secondary);color:var(--primary)}
+  .mobile-nav-actions{display:grid;grid-template-columns:auto 1fr 1fr;align-items:center;gap:8px;margin-top:8px;padding-top:10px;border-top:1px solid var(--border)}
+  .mobile-nav-actions .theme-toggle{width:46px;height:46px}
+  .mobile-nav-actions .loginBtn,.mobile-nav-actions .registerBtn{width:100%;padding:11px 12px}
+}
+@media(max-width:420px){.logo span{font-size:23px}.logo img{width:38px;height:38px}.mobile-nav-actions{grid-template-columns:1fr 1fr}.mobile-nav-actions .theme-toggle{grid-column:1/-1;justify-self:end}}
+
+/* Final landing-page header contract: keep the navigation visible while the page scrolls. */
+.navbar{position:fixed !important;top:0;left:0;right:0;width:100%;height:86px;z-index:10000;isolation:isolate;transform:translateZ(0);backface-visibility:hidden;}
+@media(max-width:1000px){.navbar{height:78px;}}
+
+/* === Universal mobile navigation stability ===
+   Keep the desktop navigation untouched; below 1100px the compact menu is always
+   available and the panel stays inside the viewport. */
+@media (max-width: 1100px) {
+  .navbar {
+    height: clamp(68px, 9vw, 78px) !important;
+    padding-inline: clamp(10px, 3.5vw, 22px) !important;
+    gap: 10px;
+  }
+
+  .navbar > .logo {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: calc(100% - 58px);
+    font-size: clamp(20px, 4.5vw, 28px);
+    gap: clamp(7px, 2vw, 12px);
+  }
+
+  .navbar > .logo img {
+    width: clamp(34px, 8vw, 44px);
+    height: clamp(34px, 8vw, 44px);
+  }
+
+  .navbar > .logo span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .navbar > .nav-links,
+  .navbar > .nav-buttons {
+    display: none !important;
+  }
+
+  .navbar > .mobile-menu {
+    display: inline-flex !important;
+    flex: 0 0 44px;
+    width: 44px !important;
+    min-width: 44px;
+    height: 44px !important;
+    min-height: 44px;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative;
+    z-index: 10003;
+    cursor: pointer;
+  }
+
+  .navbar > .mobile-menu svg {
+    width: 25px;
+    height: 25px;
+    display: block;
+    flex: 0 0 auto;
+  }
+
+  .navbar > .mobile-nav-panel {
+    display: flex !important;
+    position: fixed !important;
+    top: calc(clamp(68px, 9vw, 78px) + 8px) !important;
+    left: max(10px, env(safe-area-inset-left)) !important;
+    right: max(10px, env(safe-area-inset-right)) !important;
+    width: auto !important;
+    max-width: none !important;
+    max-height: calc(100dvh - clamp(68px, 9vw, 78px) - 20px) !important;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    z-index: 10002 !important;
+  }
+
+  .navbar > .mobile-nav-panel > button {
+    min-height: 46px;
+    touch-action: manipulation;
+  }
+
+  .navbar > .mobile-nav-panel .mobile-nav-actions {
+    position: sticky;
+    bottom: 0;
+    background: var(--card);
+  }
+}
+
+@media (max-width: 520px) {
+  .navbar {
+    padding-inline: max(10px, env(safe-area-inset-left)) max(10px, env(safe-area-inset-right)) !important;
+  }
+
+  .navbar > .logo span {
+    font-size: clamp(18px, 5.4vw, 23px);
+  }
+
+  .navbar > .mobile-menu {
+    flex-basis: 42px;
+    width: 42px !important;
+    min-width: 42px;
+    height: 42px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .navbar > .logo span {
+    max-width: 145px;
+  }
+}

@@ -1,0 +1,715 @@
+/* ===========================
+   Document Card
+=========================== */
+
+.document-card{
+
+position:relative;
+
+background:var(--card);
+
+border:1px solid var(--border);
+
+border-radius:24px;
+
+padding:25px;
+
+overflow:hidden;
+
+transition:.35s;
+
+box-shadow:0 12px 35px rgba(0,0,0,.08);
+
+display:flex;
+
+flex-direction:column;
+
+gap:18px;
+
+animation:cardFade .4s ease;
+
+}
+
+body[data-theme="dark"] .document-card{
+
+background:#1e293b;
+
+border-color:#334155;
+
+}
+
+.document-card:hover{
+
+transform:translateY(-8px);
+
+box-shadow:0 25px 60px rgba(37,99,235,.18);
+
+}
+
+/* ===========================
+   Shine Effect
+=========================== */
+
+.document-card::before{
+
+content:"";
+
+position:absolute;
+
+top:0;
+
+left:-120%;
+
+width:100%;
+
+height:100%;
+
+background:
+
+linear-gradient(
+
+90deg,
+
+transparent,
+
+rgba(255,255,255,.18),
+
+transparent
+
+);
+
+transition:.8s;
+
+pointer-events:none;
+
+}
+
+.document-card:hover::before{
+
+left:120%;
+
+}
+
+/* ===========================
+   Category Tag
+=========================== */
+
+.document-tag{
+
+display:inline-flex;
+
+align-items:center;
+
+gap:8px;
+
+padding:8px 16px;
+
+border-radius:30px;
+
+background:linear-gradient(
+
+135deg,
+
+#22c55e,
+
+#16a34a
+
+);
+
+color:#fff;
+
+font-size:13px;
+
+font-weight:700;
+
+width:max-content;
+
+}
+
+.document-tag svg{
+
+font-size:14px;
+
+}
+
+/* ===========================
+   Favorite
+=========================== */
+
+.favorite-btn{
+
+position:absolute;
+
+top:18px;
+
+right:18px;
+
+width:44px;
+
+height:44px;
+
+border:none;
+
+border-radius:50%;
+
+background:rgba(255,255,255,.15);
+
+backdrop-filter:blur(10px);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+cursor:pointer;
+
+transition:.3s;
+
+font-size:18px;
+
+color:#fbbf24;
+
+}
+
+.favorite-btn:hover{
+
+transform:scale(1.1);
+
+background:#fbbf24;
+
+color:#fff;
+
+}
+
+/* ===========================
+   File Icon
+=========================== */
+
+.document-icon{
+
+width:85px;
+
+height:85px;
+
+margin:auto;
+
+border-radius:22px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+background:linear-gradient(
+
+135deg,
+
+#2563eb,
+
+#4f46e5
+
+);
+
+box-shadow:0 15px 35px rgba(37,99,235,.25);
+
+transition:.35s;
+
+}
+
+.document-card:hover .document-icon{
+
+transform:rotate(-8deg) scale(1.08);
+
+}
+
+.document-icon svg{
+
+font-size:46px;
+
+color:#fff;
+
+}
+
+.pdf{
+
+color:white;
+
+}
+
+.word{
+
+color:white;
+
+}
+
+.image{
+
+color:white;
+
+}
+
+.file{
+
+color:white;
+
+}
+
+/* ===========================
+   File Name
+=========================== */
+
+.document-card h3{
+
+font-size:21px;
+
+text-align:center;
+
+color:var(--text);
+
+word-break:break-word;
+
+margin:0;
+
+line-height:1.4;
+
+}
+
+/* ===========================
+   Document Info
+=========================== */
+
+.document-info{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+gap:15px;
+
+padding:12px 0;
+
+border-top:1px solid var(--border);
+
+border-bottom:1px solid var(--border);
+
+color:var(--text);
+
+font-size:14px;
+
+opacity:.9;
+
+}
+
+.document-info span{
+
+display:flex;
+
+align-items:center;
+
+gap:8px;
+
+white-space:nowrap;
+
+overflow:hidden;
+
+text-overflow:ellipsis;
+
+}
+
+.document-info svg{
+
+color:#2563eb;
+
+font-size:14px;
+
+}
+
+/* ===========================
+   Actions
+=========================== */
+
+.document-actions{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:12px;
+
+margin-top:5px;
+
+}
+
+.document-actions button{
+
+height:48px;
+
+border:none;
+
+border-radius:14px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+cursor:pointer;
+
+font-size:18px;
+
+transition:.3s;
+
+color:#fff;
+
+}
+
+.document-actions button:hover{
+
+transform:translateY(-4px);
+
+}
+
+.preview-btn{
+
+background:linear-gradient(
+
+135deg,
+
+#2563eb,
+
+#1d4ed8
+
+);
+
+}
+
+.preview-btn:hover{
+
+box-shadow:0 12px 25px rgba(37,99,235,.30);
+
+}
+
+.download-btn{
+
+background:linear-gradient(
+
+135deg,
+
+#10b981,
+
+#059669
+
+);
+
+}
+
+.download-btn:hover{
+
+box-shadow:0 12px 25px rgba(16,185,129,.30);
+
+}
+
+.delete-btn{
+
+background:linear-gradient(
+
+135deg,
+
+#ef4444,
+
+#dc2626
+
+);
+
+}
+
+.delete-btn:hover{
+
+box-shadow:0 12px 25px rgba(239,68,68,.30);
+
+}
+
+/* ===========================
+   Empty Card Support
+=========================== */
+
+.document-card.empty{
+
+justify-content:center;
+
+align-items:center;
+
+min-height:280px;
+
+text-align:center;
+
+}
+
+.document-card.empty h3{
+
+font-size:22px;
+
+margin-bottom:10px;
+
+}
+
+.document-card.empty p{
+
+opacity:.7;
+
+}
+
+/* ===========================
+   Animation
+=========================== */
+
+@keyframes cardFade{
+
+from{
+
+opacity:0;
+
+transform:translateY(25px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+/* ===========================
+   Tablet
+=========================== */
+
+@media(max-width:992px){
+
+.document-card{
+
+padding:22px;
+
+}
+
+.document-icon{
+
+width:75px;
+
+height:75px;
+
+}
+
+.document-icon svg{
+
+font-size:40px;
+
+}
+
+.document-card h3{
+
+font-size:19px;
+
+}
+
+}
+
+/* ===========================
+   Mobile
+=========================== */
+
+@media(max-width:768px){
+
+.document-card{
+
+padding:18px;
+
+border-radius:18px;
+
+}
+
+.document-tag{
+
+font-size:12px;
+
+padding:7px 14px;
+
+}
+
+.favorite-btn{
+
+width:40px;
+
+height:40px;
+
+top:14px;
+
+right:14px;
+
+font-size:16px;
+
+}
+
+.document-icon{
+
+width:68px;
+
+height:68px;
+
+}
+
+.document-icon svg{
+
+font-size:34px;
+
+}
+
+.document-card h3{
+
+font-size:17px;
+
+}
+
+.document-info{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+gap:10px;
+
+font-size:13px;
+
+}
+
+.document-actions{
+
+gap:10px;
+
+}
+
+.document-actions button{
+
+height:44px;
+
+font-size:16px;
+
+}
+
+}
+
+/* ===========================
+   Small Mobile
+=========================== */
+
+@media(max-width:480px){
+
+.document-card{
+
+padding:15px;
+
+}
+
+.document-tag{
+
+font-size:11px;
+
+padding:6px 12px;
+
+}
+
+.document-icon{
+
+width:60px;
+
+height:60px;
+
+}
+
+.document-icon svg{
+
+font-size:30px;
+
+}
+
+.document-card h3{
+
+font-size:16px;
+
+}
+
+.document-info{
+
+font-size:12px;
+
+}
+
+.document-actions{
+
+grid-template-columns:1fr;
+
+}
+
+.document-actions button{
+
+width:100%;
+
+}
+
+}
+
+/* ===========================
+   Dark Theme Improvements
+=========================== */
+
+body[data-theme="dark"] .document-info{
+
+border-color:#334155;
+
+}
+
+body[data-theme="dark"] .favorite-btn{
+
+background:rgba(255,255,255,.08);
+
+}
+
+body[data-theme="dark"] .favorite-btn:hover{
+
+background:#fbbf24;
+
+color:#fff;
+
+}
+/* Responsive card sizing: never create a trapped/cropped page scroll. */
+.document-card {
+  width: 100%;
+  min-width: 0;
+}
+
+.document-card h3,
+.document-card p,
+.document-card span {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 640px) {
+  .document-card {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .document-actions {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+}

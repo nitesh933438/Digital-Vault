@@ -1,0 +1,291 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+:root{
+
+--bg:#ffffff;
+--text:#111827;
+--card:#ffffff;
+--primary:#2563eb;
+--secondary:#f3f4f6;
+--border:#e5e7eb;
+--shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+body[data-theme="dark"]{
+
+--bg:#0f172a;
+--text:#f8fafc;
+--card:#1e293b;
+--primary:#3b82f6;
+--secondary:#334155;
+--border:#475569;
+--shadow:0 10px 25px rgba(0,0,0,.45);
+
+}
+
+html{
+
+scroll-behavior:smooth;
+
+}
+
+body{
+
+margin:0;
+font-family:Arial,Helvetica,sans-serif;
+background:var(--bg);
+color:var(--text);
+
+transition:
+background .35s,
+color .35s;
+
+}
+
+a{
+
+text-decoration:none;
+color:inherit;
+
+}
+
+button{
+
+cursor:pointer;
+font-family:inherit;
+
+}
+
+img{
+
+max-width:100%;
+display:block;
+
+}
+
+section{
+
+transition:.35s;
+
+}
+
+
+/* Global readability and device-safe defaults */
+html,body,#root{width:100%;min-width:0;}
+body{overflow-x:hidden;}
+input,textarea,select{font-family:inherit;color:var(--text);}
+input::placeholder,textarea::placeholder{color:#94a3b8;opacity:1;}
+button:disabled{cursor:not-allowed;opacity:.65;}
+*,*::before,*::after{overflow-wrap:break-word;}
+
+
+/* Cross-device text and interactive element safeguards */
+button,a,input,textarea,select{max-width:100%;}
+button{touch-action:manipulation;}
+@media(max-width:600px){
+  h1,h2,h3,h4{overflow-wrap:anywhere;}
+}
+
+
+/* Page scroll safety */
+body{min-height:100dvh;}
+@media(max-width:992px){body{overflow-x:hidden;overflow-y:auto;}}
+
+/* ==========================================================
+   UNIVERSAL SCROLL / RESPONSIVE FOUNDATION
+   Keep page scrolling on the document itself. Individual
+   cards/components may have their own scroll only when needed.
+========================================================== */
+html {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-text-size-adjust: 100%;
+  scrollbar-gutter: stable;
+}
+
+body {
+  width: 100%;
+  min-width: 0;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#root {
+  width: 100%;
+  min-height: 100dvh;
+  overflow: visible;
+}
+
+/* Never let a normal page wrapper trap the browser scrollbar. */
+.favorites-page,
+.documents-page,
+.notifications-page,
+.profile-page,
+.settings-page,
+.privacy-page,
+.terms-page,
+.dashboard-content {
+  overflow: visible;
+  min-width: 0;
+}
+
+/* Long pages should remain naturally scrollable on touch devices. */
+.favorites-page,
+.documents-page,
+.notifications-page,
+.profile-page,
+.settings-page {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: auto;
+}
+
+/* Only the navigation list gets an independent scrollbar. */
+.dv-sidebar {
+  overflow: hidden;
+}
+
+.dv-sidebar-nav {
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* Prevent accidental horizontal page overflow from long filenames/text. */
+.document-grid,
+.documents-grid,
+.documents-list,
+.notification-list,
+.cards-grid,
+.chart-grid {
+  min-width: 0;
+  width: 100%;
+}
+
+@media (max-width: 992px) {
+  html,
+  body {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+/* Auth/legal pages: decorative backgrounds may not trap page scrolling. */
+.login-page,
+.forgot-page,
+.register-page,
+.privacy-page,
+.terms-page,
+.not-found-page {
+  width: 100%;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+@media (max-height: 700px) {
+  .login-page,
+  .forgot-page {
+    align-items: flex-start;
+    min-height: 100dvh;
+  }
+}
+
+/* PWA / mobile safe-area polish */
+html, body { min-height: 100%; }
+body { padding: 0; }
+@supports (padding: max(0px)) {
+  body { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
+}
+button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+
+/* ===== Final page-scroll contract ===== */
+html, body, #root { min-height: 100%; }
+html { overflow-x: hidden; overflow-y: auto; }
+body { overflow-x: hidden; overflow-y: auto; }
+.dashboard { min-height: 100dvh; overflow: visible; }
+.dashboard-content { min-height: 100dvh; overflow: visible; }
+@media (max-width: 992px) {
+  .dashboard-content { min-height: 100dvh; }
+}
+
+
+/* ================= v11 AUTHENTICATED APP SHELL ================= */
+.app-page-shell{min-height:100dvh;width:100%;background:var(--bg);color:var(--text);overflow:visible;}
+.app-page-main{min-width:0;margin-left:290px;min-height:100dvh;display:flex;flex-direction:column;}
+.app-page-content{min-width:0;flex:1;padding:150px 30px 35px;}
+.app-page-content > *{min-width:0;}
+.app-page-main .footer{margin-top:20px;}
+@media(max-width:1200px){.app-page-main{margin-left:290px;}.app-page-content{padding:145px 24px 30px;}}
+@media(max-width:992px){.app-page-main{margin-left:0;}.app-page-content{padding:130px 22px 28px;}}
+@media(max-width:720px){.app-page-content{padding:112px 14px 22px;}.app-page-main .footer{margin-top:10px;}}
+@media(max-width:480px){.app-page-content{padding:108px 10px 18px;}}
+
+/* v11 authenticated page shell: one consistent app frame on every protected page. */
+.app-page-shell{min-height:100dvh;width:100%;background:var(--bg);color:var(--text);overflow:visible;}
+.app-page-main{margin-left:290px;min-height:100dvh;min-width:0;display:flex;flex-direction:column;}
+.app-page-content{flex:1;min-width:0;padding:150px 30px 34px;overflow:visible;}
+.app-page-content > *{min-width:0;max-width:100%;}
+.app-page-main .footer{margin-top:auto;}
+@media(max-width:1200px){.app-page-main{margin-left:290px}.app-page-content{padding:145px 24px 30px}}
+@media(max-width:992px){.app-page-main{margin-left:0}.app-page-content{padding:130px 22px 28px}}
+@media(max-width:720px){.app-page-content{padding:112px 14px 22px}}
+@media(max-width:480px){.app-page-content{padding:108px 10px 18px}}
+
+/* Universal responsive safety layer */
+html { min-width: 320px; overflow-x: hidden; }
+body { overflow-x: hidden; }
+button, input, select, textarea { max-width: 100%; }
+img, svg, video, canvas { max-width: 100%; }
+button { touch-action: manipulation; }
+
+@media (max-width: 900px) {
+  .app-page-content, .dashboard-content { min-width: 0; }
+}
+
+@media (max-width: 600px) {
+  .footer-container { padding-left: 18px !important; padding-right: 18px !important; gap: 26px !important; }
+  .footer { margin-top: 44px; padding-top: 38px; }
+}
+
+/* Public landing-page fixed header contract */
+body{padding-top:0 !important;}
+.hero{scroll-margin-top:90px;}
+section[id]{scroll-margin-top:96px;}
+@media(max-width:1000px){section[id]{scroll-margin-top:86px;}}
+
+/* Landing sections stop below the fixed header when reached by anchor navigation. */
+section[id]{scroll-margin-top:96px;}
+@media(max-width:1000px){section[id]{scroll-margin-top:86px;}}
+
+.brand-heading,.dashboard-brand,.footer-brand{display:flex;align-items:center;gap:10px;}
+.brand-heading-logo{width:52px;height:52px;object-fit:contain;flex:none;}
+.dashboard-brand img,.footer-brand img{width:34px;height:34px;object-fit:contain;flex:none;}
+
+/* v1.0.19: keep the authenticated content aligned when the desktop sidebar collapses. */
+.app-page-shell:has(.dv-sidebar.collapsed) .app-page-main { margin-left: 90px; }
+.app-page-shell:has(.dv-sidebar.collapsed) .topbar { left: 120px; }
+@media (max-width: 1200px) {
+  .app-page-shell:has(.dv-sidebar.collapsed) .topbar { left: 110px; }
+}
+@media (max-width: 992px) {
+  .app-page-shell:has(.dv-sidebar.collapsed) .app-page-main { margin-left: 0; }
+  .app-page-shell:has(.dv-sidebar.collapsed) .topbar { left: 20px; }
+}
+@media (max-width: 720px) {
+  .app-page-shell:has(.dv-sidebar.collapsed) .topbar { left: 68px; }
+}
+@media (max-width: 460px) {
+  .app-page-shell:has(.dv-sidebar.collapsed) .topbar { left: 62px; }
+}

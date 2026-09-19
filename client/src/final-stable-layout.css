@@ -1,0 +1,116 @@
+/* Digital Vault v1.0.55 — final cross-device layout hardening.
+   Priority: every visible control remains reachable; dense areas scroll
+   inside themselves; the page itself never gains accidental horizontal scroll. */
+
+*,*::before,*::after{box-sizing:border-box}
+html,body,#root{width:100%;min-width:0;max-width:100%;}
+html{overflow-x:hidden}
+body{overflow-x:hidden}
+
+/* ---------- Authenticated shell ---------- */
+.app-page-shell,.app-page-main,.app-page-content,
+.dashboard,.dashboard-content,.documents-page,.favorites-page,
+.notifications-page,.profile-page,.settings-page{min-width:0!important;max-width:100%!important}
+.app-page-main{box-sizing:border-box}
+.app-page-content{overflow-x:clip}
+
+/* ---------- Generic responsive controls ---------- */
+button,input,select,textarea{max-width:100%;min-width:0}
+img,video,canvas,iframe,svg{max-width:100%}
+.header-buttons,.nav-buttons,.notification-actions,.notification-admin-actions,
+.modal-actions,.recent-actions,.quick-actions{min-width:0;max-width:100%;}
+
+/* ---------- Documents: fluid first, scroll only where intentional ---------- */
+.documents-grid{width:100%!important;min-width:0!important;max-width:100%!important;display:grid!important;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))!important}
+.documents-grid>*{min-width:0!important;max-width:100%!important}
+.documents-toolbar{width:100%!important;min-width:0!important;max-width:100%!important;display:flex!important;flex-wrap:wrap!important;gap:clamp(8px,1vw,14px)!important}
+.documents-toolbar .search-box{flex:1 1 360px!important;min-width:min(280px,100%)!important;max-width:100%!important}
+.documents-toolbar select,.documents-toolbar .toolbar-btn{flex:0 1 auto!important;min-width:0!important;max-width:100%!important}
+.document-card,.document-card>*{min-width:0!important;max-width:100%!important}
+.document-card h3{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.document-actions{min-width:0!important;max-width:100%!important}
+
+/* ---------- Admin Center: independent, vertical sidebar ---------- */
+.admin-layout{min-width:0!important;width:100%;max-width:100%;overflow-x:hidden}
+.admin-sidebar{
+  width:260px!important;min-width:260px!important;max-width:260px!important;
+  height:100dvh!important;max-height:100dvh!important;
+  overflow:hidden!important;display:flex!important;flex-direction:column!important;
+}
+.admin-brand{flex:0 0 auto;min-width:0}
+.admin-nav{
+  display:flex!important;flex-direction:column!important;align-items:stretch!important;
+  flex:1 1 auto!important;min-height:0!important;width:100%!important;
+  overflow-y:auto!important;overflow-x:hidden!important;
+  padding:14px!important;gap:6px!important;
+  scrollbar-width:thin;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
+}
+.admin-nav button{
+  flex:0 0 auto!important;width:100%!important;min-width:0!important;max-width:100%!important;
+  white-space:normal!important;overflow:hidden!important;text-overflow:ellipsis;
+}
+.admin-nav button svg{flex:0 0 auto}
+.admin-nav-count{margin-left:auto;flex:0 0 auto}
+.admin-sidebar-bottom{
+  flex:0 0 auto!important;width:100%!important;min-width:0!important;
+  margin-top:0!important;padding:12px 14px!important;
+  overflow:hidden!important;
+}
+.admin-sidebar-bottom button{width:100%!important;min-width:0!important}
+.admin-main{min-width:0!important;max-width:100%!important;overflow-x:clip}
+.admin-content{min-width:0!important;max-width:100%!important}
+.admin-topbar{min-width:0!important;max-width:100%!important}
+.admin-topbar-left,.admin-account{min-width:0!important;max-width:100%!important}
+.admin-topbar-left{flex:1 1 auto}
+.admin-topbar-left>div{min-width:0}
+.admin-account{flex:0 0 auto}
+.admin-welcome,.admin-grid,.admin-stats,.quick-actions{min-width:0!important;max-width:100%!important}
+.admin-stats>div,.admin-card{min-width:0!important;max-width:100%!important}
+.admin-table-wrap{width:100%!important;min-width:0!important;max-width:100%!important;overflow-x:auto!important;overflow-y:visible!important;-webkit-overflow-scrolling:touch}
+.admin-table-wrap table{min-width:760px;max-width:none;width:max-content}
+
+/* Admin mobile drawer: sidebar remains vertically scrollable, never horizontally. */
+@media(max-width:760px){
+  .admin-sidebar{width:min(300px,86vw)!important;min-width:0!important;max-width:min(300px,86vw)!important}
+  .admin-nav{overflow-y:auto!important;overflow-x:hidden!important}
+  .admin-main{width:100%!important;margin-left:0!important}
+  .admin-topbar{padding-inline:12px!important}
+  .admin-content{padding-inline:clamp(10px,3vw,18px)!important}
+  .admin-welcome{width:100%;overflow:hidden}
+  .admin-grid{grid-template-columns:1fr!important}
+  .admin-stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .quick-actions{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .section-head{min-width:0}
+}
+@media(max-width:480px){
+  .admin-stats,.quick-actions{grid-template-columns:1fr!important}
+  .admin-topbar{gap:8px!important}
+  .admin-topbar h1{max-width:42vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .admin-account{gap:5px!important}
+}
+
+/* ---------- Dense toolbars: wrap on normal pages, local-scroll where required ---------- */
+.pdf-page-toolbar,.zoom-toolbar{max-width:100%!important;min-width:0!important;overflow-x:auto!important;overflow-y:hidden!important;display:flex!important;flex-wrap:nowrap!important;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scrollbar-width:thin}
+.pdf-page-toolbar>*,.zoom-toolbar>*{flex:0 0 auto!important}
+
+/* ---------- Dialog safety ---------- */
+.preview-overlay,.storage-details-overlay,.admin-modal-backdrop{max-width:100vw!important;overflow:auto!important}
+.preview-modal,.storage-details-sheet,.admin-modal{min-width:0!important;width:min(1100px,calc(100vw - 20px))!important;max-width:calc(100vw - 20px)!important;max-height:calc(100dvh - 20px)!important;overflow:auto!important}
+
+/* ---------- Small screens ---------- */
+@media(max-width:700px){
+  .app-page-main{width:100%!important;margin-left:0!important;max-width:100%!important}
+  .app-page-content{padding-inline:10px!important}
+  .documents-grid{grid-template-columns:minmax(0,1fr)!important}
+  .documents-toolbar .search-box,.documents-toolbar select,.documents-toolbar .toolbar-btn{flex:1 1 100%!important;width:100%!important}
+  .header-buttons,.nav-buttons,.notification-actions,.notification-admin-actions,.modal-actions,.recent-actions{flex-wrap:wrap!important}
+}
+@media(max-width:380px){
+  .app-page-content{padding-inline:8px!important}
+  .admin-content{padding-inline:8px!important}
+  .documents-toolbar{gap:8px!important}
+}
+
+/* ---------- Touch + motion ---------- */
+@media(pointer:coarse){button,a,select{touch-action:manipulation}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}

@@ -1,0 +1,21 @@
+.category-chart{
+
+margin-top:35px;
+
+background:var(--card);
+
+padding:25px;
+
+border-radius:18px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+.category-chart h2{
+
+margin-bottom:20px;
+
+color:var(--text);
+
+}

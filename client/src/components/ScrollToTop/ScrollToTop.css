@@ -1,0 +1,68 @@
+.scroll-top{
+
+position:fixed;
+
+right:25px;
+
+bottom:25px;
+
+width:55px;
+
+height:55px;
+
+border:none;
+
+border-radius:50%;
+
+background:linear-gradient(135deg,#2563eb,#4f46e5);
+
+color:white;
+
+font-size:20px;
+
+cursor:pointer;
+
+z-index:999;
+
+box-shadow:0 10px 30px rgba(37,99,235,.35);
+
+animation:fadeIn .3s;
+
+transition:.3s;
+
+}
+
+.scroll-top:hover{
+
+transform:translateY(-5px) scale(1.08);
+
+}
+
+@keyframes fadeIn{
+
+from{
+
+opacity:0;
+
+transform:translateY(20px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+@media (max-width: 600px) {
+  .scroll-top {
+    right: 14px;
+    bottom: 14px;
+    width: 46px;
+    height: 46px;
+    font-size: 17px;
+  }
+}

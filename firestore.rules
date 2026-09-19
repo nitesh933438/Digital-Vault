@@ -1,0 +1,448 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // =========================================================
+    // BASIC HELPERS
+    // =========================================================
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isSelf(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+
+    // =========================================================
+    // ROOT ADMIN
+    // =========================================================
+    // Permanent primary administrator.
+    //
+    // IMPORTANT:
+    // Only the exact Google account below is treated as the
+    // root administrator. A password account using the same
+    // email is NOT treated as root admin.
+    // =========================================================
+
+    function isRootAdmin() {
+      return signedIn()
+        && request.auth.token.email == "nitesh933438@gmail.com"
+        && request.auth.token.firebase.sign_in_provider == "google.com";
+    }
+
+
+    // =========================================================
+    // ADMIN
+    // =========================================================
+    // Root admin OR delegated admin stored in users/{uid}.
+    //
+    // A disabled delegated admin loses admin privileges.
+    // =========================================================
+
+    function isAdmin() {
+      return isRootAdmin()
+        || (
+          signedIn()
+          && exists(
+            /databases/$(database)/documents/users/$(request.auth.uid)
+          )
+          && get(
+            /databases/$(database)/documents/users/$(request.auth.uid)
+          ).data.role == "admin"
+          && get(
+            /databases/$(database)/documents/users/$(request.auth.uid)
+          ).data.status != "disabled"
+        );
+    }
+
+
+    // =========================================================
+    // PROTECTED ROOT ADMIN USER
+    // =========================================================
+    // Protects the root administrator's Firestore profile.
+    //
+    // The root admin cannot be:
+    // - demoted
+    // - disabled
+    // - changed to another email
+    //
+    // The target user's existing Firestore document is checked.
+    // =========================================================
+
+    function isProtectedRootUser(userId) {
+      return exists(
+        /databases/$(database)/documents/users/$(userId)
+      )
+      && get(
+        /databases/$(database)/documents/users/$(userId)
+      ).data.email == "nitesh933438@gmail.com"
+      && get(
+        /databases/$(database)/documents/users/$(userId)
+      ).data.role == "admin";
+    }
+
+
+    // =========================================================
+    // USERS
+    // =========================================================
+
+    match /users/{userId} {
+
+      // -------------------------------------------------------
+      // READ
+      // -------------------------------------------------------
+      // Users can read their own profile.
+      // Admins can read all profiles.
+      // -------------------------------------------------------
+
+      allow read: if
+        isSelf(userId)
+        || isAdmin();
+
+
+      // -------------------------------------------------------
+      // CREATE
+      // -------------------------------------------------------
+      // Normal user:
+      // - own document only
+      // - role must be user
+      // - status must be active
+      //
+      // Root admin:
+      // - own document only
+      // - role must be admin
+      // - status must be active
+      // -------------------------------------------------------
+
+      allow create: if
+        (
+          isSelf(userId)
+          && request.resource.data.role == "user"
+          && request.resource.data.status == "active"
+        )
+        ||
+        (
+          isRootAdmin()
+          && isSelf(userId)
+          && request.resource.data.role == "admin"
+          && request.resource.data.status == "active"
+        );
+
+
+      // -------------------------------------------------------
+      // UPDATE
+      // -------------------------------------------------------
+      // Admins can manage users.
+      //
+      // Root admin protection:
+      // - email cannot change
+      // - role cannot change
+      // - status cannot change
+      //
+      // Other profile fields may still be updated.
+      // -------------------------------------------------------
+
+      allow update: if
+        isAdmin()
+        && (
+          !isProtectedRootUser(userId)
+          ||
+          (
+            request.resource.data.email == resource.data.email
+            && request.resource.data.role == resource.data.role
+            && request.resource.data.status == resource.data.status
+          )
+        );
+
+
+      // -------------------------------------------------------
+      // DELETE
+      // -------------------------------------------------------
+      // Admin can delete another user's Firestore profile.
+      //
+      // Cannot:
+      // - delete own profile
+      // - delete root admin profile
+      // -------------------------------------------------------
+
+      allow delete: if
+        isAdmin()
+        && userId != request.auth.uid
+        && resource.data.email != "nitesh933438@gmail.com";
+    }
+
+
+    // =========================================================
+    // DOCUMENTS
+    // =========================================================
+
+    match /documents/{documentId} {
+
+      // -------------------------------------------------------
+      // READ
+      // -------------------------------------------------------
+      // Owner can read own documents.
+      // Admin can read all documents.
+      // -------------------------------------------------------
+
+      allow read: if
+        isAdmin()
+        ||
+        (
+          signedIn()
+          && resource.data.uid == request.auth.uid
+        );
+
+
+      // -------------------------------------------------------
+      // CREATE
+      // -------------------------------------------------------
+      // User can create only their own document.
+      // Admin can create documents as well.
+      // -------------------------------------------------------
+
+      allow create: if
+        isAdmin()
+        ||
+        (
+          signedIn()
+          && request.resource.data.uid == request.auth.uid
+        );
+
+
+      // -------------------------------------------------------
+      // UPDATE
+      // -------------------------------------------------------
+      // Owner/admin can update.
+      //
+      // A document UID cannot be transferred to another user.
+      // -------------------------------------------------------
+
+      allow update: if
+        (
+          isAdmin()
+          ||
+          (
+            signedIn()
+            && resource.data.uid == request.auth.uid
+          )
+        )
+        && request.resource.data.uid == resource.data.uid;
+
+
+      // -------------------------------------------------------
+      // DELETE
+      // -------------------------------------------------------
+      // Owner/admin can delete Firestore document metadata.
+      // -------------------------------------------------------
+
+      allow delete: if
+        isAdmin()
+        ||
+        (
+          signedIn()
+          && resource.data.uid == request.auth.uid
+        );
+    }
+
+
+    // =========================================================
+    // NOTIFICATIONS
+    // =========================================================
+
+    match /notifications/{notificationId} {
+
+      // -------------------------------------------------------
+      // READ
+      // -------------------------------------------------------
+      // User sees own notifications.
+      // Admin sees all notifications.
+      // -------------------------------------------------------
+
+      allow read: if
+        isAdmin()
+        ||
+        (
+          signedIn()
+          && resource.data.uid == request.auth.uid
+        );
+
+
+      // -------------------------------------------------------
+      // CREATE
+      // -------------------------------------------------------
+      // Admin can create notifications for users.
+      // User can create only for themselves.
+      // -------------------------------------------------------
+
+      allow create: if
+        isAdmin()
+        ||
+        (
+          signedIn()
+          && request.resource.data.uid == request.auth.uid
+        );
+
+
+      // -------------------------------------------------------
+      // UPDATE
+      // -------------------------------------------------------
+      // Admin can update any notification.
+      //
+      // User can update only their own notification and cannot
+      // change the notification's owner.
+      // -------------------------------------------------------
+
+      allow update: if
+        isAdmin()
+        ||
+        (
+          signedIn()
+          && resource.data.uid == request.auth.uid
+          && request.resource.data.uid == resource.data.uid
+        );
+
+
+      // -------------------------------------------------------
+      // DELETE
+      // -------------------------------------------------------
+      // Admin or notification owner can delete.
+      // -------------------------------------------------------
+
+      allow delete: if
+        isAdmin()
+        ||
+        (
+          signedIn()
+          && resource.data.uid == request.auth.uid
+        );
+    }
+
+
+    // =========================================================
+    // NEWSLETTER SUBSCRIBERS
+    // =========================================================
+    // Public visitors can subscribe.
+    //
+    // Subscriber records cannot be publicly read.
+    // Only admins can read/update/delete subscribers.
+    // =========================================================
+
+    match /newsletterSubscribers/{subscriberId} {
+
+      // -------------------------------------------------------
+      // CREATE
+      // -------------------------------------------------------
+      // Validate public newsletter submissions.
+      // -------------------------------------------------------
+
+      allow create: if
+        request.resource.data.email is string
+        && request.resource.data.email.size() > 0
+        && request.resource.data.email.size() <= 160
+        && request.resource.data.email.matches(
+          '^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$'
+        )
+        && request.resource.data.status == "active"
+        && request.resource.data.source == "website";
+
+
+      // -------------------------------------------------------
+      // READ
+      // -------------------------------------------------------
+
+      allow read: if isAdmin();
+
+
+      // -------------------------------------------------------
+      // UPDATE
+      // -------------------------------------------------------
+
+      allow update: if isAdmin();
+
+
+      // -------------------------------------------------------
+      // DELETE
+      // -------------------------------------------------------
+
+      allow delete: if isAdmin();
+    }
+
+
+    // =========================================================
+    // CONTACT MESSAGES
+    // =========================================================
+    // Anyone can submit a valid Contact Us message.
+    //
+    // Only admins can view/manage submitted messages.
+    // =========================================================
+
+    match /contactMessages/{messageId} {
+
+      // -------------------------------------------------------
+      // CREATE
+      // -------------------------------------------------------
+      // Validate public Contact Us submissions.
+      // -------------------------------------------------------
+
+      allow create: if
+        request.resource.data.name is string
+        && request.resource.data.email is string
+        && request.resource.data.subject is string
+        && request.resource.data.message is string
+
+        && request.resource.data.name.size() > 0
+        && request.resource.data.name.size() <= 100
+
+        && request.resource.data.email.size() > 0
+        && request.resource.data.email.size() <= 160
+        && request.resource.data.email.matches(
+          '^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$'
+        )
+
+        && request.resource.data.subject.size() <= 180
+
+        && request.resource.data.message.size() > 0
+        && request.resource.data.message.size() <= 5000
+
+        && request.resource.data.status == "new"
+        && request.resource.data.source == "website";
+
+
+      // -------------------------------------------------------
+      // READ
+      // -------------------------------------------------------
+
+      allow read: if isAdmin();
+
+
+      // -------------------------------------------------------
+      // UPDATE
+      // -------------------------------------------------------
+
+      allow update: if isAdmin();
+
+
+      // -------------------------------------------------------
+      // DELETE
+      // -------------------------------------------------------
+
+      allow delete: if isAdmin();
+    }
+
+
+    // =========================================================
+    // DEFAULT DENY
+    // =========================================================
+    // Any collection/document not explicitly defined above
+    // is completely inaccessible.
+    // =========================================================
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
